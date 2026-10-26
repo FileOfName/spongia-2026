@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://vw3gvuwg4koc"]
+
+[ext_resource type="Script" uid="uid://df85bjddi2vkg" path="res://nav_test/test_nav_script.gd" id="1_kqswi"]
+[ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="2_hg8s3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7xlja"]
+radius = 7.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2055058711]
+scale = Vector2(2.53, 2.53)
+motion_mode = 1
+script = ExtResource("1_kqswi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=389075795]
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("2_hg8s3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1051523135]
+shape = SubResource("CircleShape2D_7xlja")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1504946886]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 20.0
+max_speed = 300.0
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
