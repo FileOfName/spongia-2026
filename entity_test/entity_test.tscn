@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bkyuqf6lqnspc"]
+
+[ext_resource type="Script" uid="uid://s2krjc04wens" path="res://entity_test/entity_test_script.gd" id="1_yulwx"]
+[ext_resource type="Script" uid="uid://bjmmr4lboofsi" path="res://entity.gd" id="2_i178h"]
+[ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="3_coama"]
+
+[node name="EntityTest" type="Node2D" unique_id=50392317]
+script = ExtResource("1_yulwx")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1133425193 node_paths=PackedStringArray("sprite")]
+position = Vector2(270, 247)
+script = ExtResource("2_i178h")
+sprite = NodePath("Sprite2D")
+MAX_HEALTH = 200.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=860498136]
+texture = ExtResource("3_coama")
+
+[node name="Label2" type="Label" parent="." unique_id=146397039]
+offset_left = 18.0
+offset_top = 192.0
+offset_right = 185.0
+offset_bottom = 224.0
+text = "dEFAULT 2"
+
+[node name="Button2" type="Button" parent="." unique_id=844697021]
+offset_left = 276.0
+offset_top = 36.0
+offset_right = 414.0
+offset_bottom = 108.0
+text = "DAMAGE"
+
+[node name="Button" type="Button" parent="." unique_id=660750933]
+offset_left = 82.0
+offset_top = 30.0
+offset_right = 220.0
+offset_bottom = 102.0
+text = "HEAL"
+
+[node name="Label" type="Label" parent="." unique_id=2036328547]
+offset_left = 19.0
+offset_top = 142.0
+offset_right = 186.0
+offset_bottom = 174.0
+text = "dEFAULT"
+
+[connection signal="death" from="CharacterBody2D" to="." method="_on_character_body_2d_death"]
+[connection signal="health_changed" from="CharacterBody2D" to="." method="_on_character_body_2d_health_changed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
