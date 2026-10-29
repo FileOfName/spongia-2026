@@ -16,9 +16,9 @@ var health:
 		return _health
 	set(value):
 		_health = clamp(value, 0, MAX_HEALTH)
-		health_changed.emit(_health)
 		if _health == 0:
-			death.emit()
+			death()
+		health_changed.emit(_health)
 
 func is_invulnerable() -> bool:
 	return _invulnerability > 0
@@ -31,7 +31,11 @@ func damage(amount: int):
 
 	# Red flash
 
-	sprite.modulate = Color(1, 0, 0)
+	sprite.modulate = Color(1, 0.5, 0.5)
+	# dont animate the red flash if we are dead
+	if health == 0:
+		return
+
 	var tween = create_tween()
 	tween.tween_property(sprite, "modulate", Color(1,1,1), INVULNERABILITY_SECONDS).set_trans(Tween.TRANS_SINE)
 
@@ -43,9 +47,19 @@ func heal(amount: int):
 	if _heal_tween != null:
 		_heal_tween.kill()
 
-	sprite.modulate = Color(0.2, 1, 0)
+	sprite.modulate = Color(0.5, 1, 0.6)
 	_heal_tween = create_tween()
 	_heal_tween.tween_property(sprite, "modulate", Color(1,1,1), 0.4).set_trans(Tween.TRANS_SINE)
+
+func death():
+	var tween = create_tween()
+
+	tween.tween_property(sprite, "rotation_degrees", sprite.rotation_degrees - 90, 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5, 0), 0.3).set_trans(Tween.TRANS_QUINT)
+
+	tween.finished.connect(func ():
+		queue_free()
+	)
 
 func tick_invulnerability(delta: float):
 	_invulnerability = max(0, _invulnerability - delta)
@@ -54,4 +68,3 @@ func _process(delta: float) -> void:
 	tick_invulnerability(delta)
 
 signal health_changed(health: int)
-signal death()
