@@ -1,17 +1,18 @@
 [gd_scene format=3 uid="uid://bkyuqf6lqnspc"]
 
 [ext_resource type="Script" uid="uid://s2krjc04wens" path="res://entity_test/entity_test_script.gd" id="1_yulwx"]
-[ext_resource type="Script" uid="uid://bjmmr4lboofsi" path="res://entity.gd" id="2_i178h"]
+[ext_resource type="Script" uid="uid://bkki0pjc7702w" path="res://player.gd" id="2_yulwx"]
 [ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="3_coama"]
+[ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="4_i178h"]
 
 [node name="EntityTest" type="Node2D" unique_id=50392317]
 script = ExtResource("1_yulwx")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1133425193 node_paths=PackedStringArray("sprite")]
 position = Vector2(270, 247)
-script = ExtResource("2_i178h")
+script = ExtResource("2_yulwx")
+SPEED = 280.0
 sprite = NodePath("Sprite2D")
-MAX_HEALTH = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=860498136]
 texture = ExtResource("3_coama")
@@ -44,7 +45,11 @@ offset_right = 186.0
 offset_bottom = 174.0
 text = "dEFAULT"
 
-[connection signal="death" from="CharacterBody2D" to="." method="_on_character_body_2d_death"]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=314330621 node_paths=PackedStringArray("player")]
+script = ExtResource("4_i178h")
+player = NodePath("../CharacterBody2D")
+SPEED = 5.0
+
 [connection signal="health_changed" from="CharacterBody2D" to="." method="_on_character_body_2d_health_changed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
