@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://gnmc6doeugtd"]
+
+[ext_resource type="Script" uid="uid://bkki0pjc7702w" path="res://entity/player/player.gd" id="1_e6ar1"]
+[ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="2_4pl66"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4x1p8"]
+size = Vector2(85, 78)
+
+[node name="Player" type="CharacterBody2D" unique_id=214714032 node_paths=PackedStringArray("SPRITE")]
+motion_mode = 1
+script = ExtResource("1_e6ar1")
+SPRITE = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=488023533]
+scale = Vector2(0.54, 0.54)
+texture = ExtResource("2_4pl66")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1030996739]
+scale = Vector2(3.63, 3.63)
+shape = SubResource("RectangleShape2D_0ps6c")
+
+[node name="SwordHitBox" type="Area2D" parent="." unique_id=2065894759]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitBox" unique_id=257707662]
+position = Vector2(79.5, 0)
+shape = SubResource("RectangleShape2D_4x1p8")
+disabled = true
+
+[connection signal="body_entered" from="SwordHitBox" to="." method="_on_sword_hit_box_body_entered"]

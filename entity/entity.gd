@@ -2,20 +2,20 @@ class_name Entity
 
 extends CharacterBody2D
 
-@export var sprite: Sprite2D
+@export var SPRITE: Sprite2D
 @export var MAX_HEALTH: float = 100
 @export var INVULNERABILITY_SECONDS: float = 0.2
 
+var _invulnerability: float = 0
 var _heal_tween: Tween = null;
 
 var _health: float = MAX_HEALTH
-var _invulnerability: float = 0
-
 var health:
 	get:
 		return _health
 	set(value):
 		_health = clamp(value, 0, MAX_HEALTH)
+		# the entity can technically die multiple times, will fix if its a problem
 		if _health == 0:
 			death()
 		health_changed.emit(_health)
@@ -31,13 +31,13 @@ func damage(amount: int):
 
 	# Red flash
 
-	sprite.modulate = Color(1, 0.5, 0.5)
+	SPRITE.modulate = Color(1, 0.5, 0.5)
 	# dont animate the red flash if we are dead
 	if health == 0:
 		return
 
 	var tween = create_tween()
-	tween.tween_property(sprite, "modulate", Color(1,1,1), INVULNERABILITY_SECONDS).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(SPRITE, "modulate", Color(1,1,1), INVULNERABILITY_SECONDS).set_trans(Tween.TRANS_SINE)
 
 
 func heal(amount: int):
@@ -47,19 +47,17 @@ func heal(amount: int):
 	if _heal_tween != null:
 		_heal_tween.kill()
 
-	sprite.modulate = Color(0.5, 1, 0.6)
+	SPRITE.modulate = Color(0.5, 1, 0.6)
 	_heal_tween = create_tween()
-	_heal_tween.tween_property(sprite, "modulate", Color(1,1,1), 0.4).set_trans(Tween.TRANS_SINE)
+	_heal_tween.tween_property(SPRITE, "modulate", Color(1,1,1), 0.4).set_trans(Tween.TRANS_SINE)
 
 func death():
 	var tween = create_tween()
 
-	tween.tween_property(sprite, "rotation_degrees", sprite.rotation_degrees - 90, 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(sprite, "modulate", Color(1, 0.5, 0.5, 0), 0.3).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(SPRITE, "rotation_degrees", SPRITE.rotation_degrees - 90, 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(SPRITE, "modulate", Color(1, 0.5, 0.5, 0), 0.3).set_trans(Tween.TRANS_QUINT)
 
-	tween.finished.connect(func ():
-		queue_free()
-	)
+	tween.finished.connect(queue_free)
 
 func tick_invulnerability(delta: float):
 	_invulnerability = max(0, _invulnerability - delta)

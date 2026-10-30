@@ -1,21 +1,18 @@
 [gd_scene format=3 uid="uid://bkyuqf6lqnspc"]
 
 [ext_resource type="Script" uid="uid://s2krjc04wens" path="res://entity_test/entity_test_script.gd" id="1_yulwx"]
-[ext_resource type="Script" uid="uid://bkki0pjc7702w" path="res://player.gd" id="2_yulwx"]
+[ext_resource type="PackedScene" uid="uid://gnmc6doeugtd" path="res://entity/player/player.tscn" id="2_yulwx"]
 [ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="3_coama"]
+[ext_resource type="Script" uid="uid://bjmmr4lboofsi" path="res://entity/entity.gd" id="3_d6i6a"]
 [ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="4_i178h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
+size = Vector2(129, 131)
 
 [node name="EntityTest" type="Node2D" unique_id=50392317]
 script = ExtResource("1_yulwx")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1133425193 node_paths=PackedStringArray("sprite")]
-position = Vector2(270, 247)
-script = ExtResource("2_yulwx")
-SPEED = 280.0
-sprite = NodePath("Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=860498136]
-texture = ExtResource("3_coama")
+[node name="Player" parent="." unique_id=214714032 instance=ExtResource("2_yulwx")]
 
 [node name="Label2" type="Label" parent="." unique_id=146397039]
 offset_left = 18.0
@@ -45,11 +42,21 @@ offset_right = 186.0
 offset_bottom = 174.0
 text = "dEFAULT"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=314330621 node_paths=PackedStringArray("player")]
-script = ExtResource("4_i178h")
-player = NodePath("../CharacterBody2D")
-SPEED = 5.0
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=552221102 node_paths=PackedStringArray("SPRITE")]
+position = Vector2(0, 200)
+script = ExtResource("3_d6i6a")
+SPRITE = NodePath("Sprite2D")
 
-[connection signal="health_changed" from="CharacterBody2D" to="." method="_on_character_body_2d_health_changed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=215638558]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_0ps6c")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1475654955]
+texture = ExtResource("3_coama")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=126265457 node_paths=PackedStringArray("player")]
+script = ExtResource("4_i178h")
+player = NodePath("../Player")
+
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
