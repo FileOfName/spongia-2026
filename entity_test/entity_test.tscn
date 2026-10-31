@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="3_coama"]
 [ext_resource type="Script" uid="uid://bjmmr4lboofsi" path="res://entity/entity.gd" id="3_d6i6a"]
 [ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="4_i178h"]
+[ext_resource type="PackedScene" uid="uid://bilvmgvc1esl1" path="res://health_bar/health_bar.tscn" id="6_d6i6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
 size = Vector2(129, 131)
@@ -13,6 +14,7 @@ size = Vector2(129, 131)
 script = ExtResource("1_yulwx")
 
 [node name="Player" parent="." unique_id=214714032 instance=ExtResource("2_yulwx")]
+position = Vector2(253, 216)
 
 [node name="Label2" type="Label" parent="." unique_id=146397039]
 offset_left = 18.0
@@ -58,5 +60,19 @@ texture = ExtResource("3_coama")
 script = ExtResource("4_i178h")
 player = NodePath("../Player")
 
+[node name="HUD" type="CanvasLayer" parent="." unique_id=746800742]
+
+[node name="Label" type="Label" parent="HUD" unique_id=1257513295]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "agagaggggggggggg"
+
+[node name="TextureProgressBar" parent="HUD" unique_id=102016543 node_paths=PackedStringArray("entity") instance=ExtResource("6_d6i6a")]
+entity = NodePath("../../Player")
+
+[node name="HealthBar" parent="." unique_id=2079657944 node_paths=PackedStringArray("entity") instance=ExtResource("6_d6i6a")]
+entity = NodePath("../CharacterBody2D")
+
+[connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

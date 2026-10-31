@@ -11,11 +11,13 @@ func death():
 	pass
 
 func _process(delta: float) -> void:
+	super._process(delta)
+
+	# I know, timers, who cares
 	if attack_cooldown == 0 and Input.is_action_just_pressed("attack"):
 		$SwordHitBox/CollisionShape2D.disabled = false
 		attack_cooldown = ATTACK_SECONDS
 
-	# I know, timers, who cares
 	attack_cooldown -= delta
 
 	if attack_cooldown < 0:
