@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bws0n0vboges4"]
+
+[ext_resource type="Texture2D" uid="uid://yh0bwo8bwkmg" path="res://assets/ui/nine_patch.png" id="1_gvx5b"]
+
+[node name="Control" type="Control" unique_id=2011627687]
+custom_minimum_size = Vector2(72, 72)
+custom_maximum_size = Vector2(72, 72)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="InvSlot" type="NinePatchRect" parent="." unique_id=1613073845]
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+scale = Vector2(3, 3)
+texture = ExtResource("1_gvx5b")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
