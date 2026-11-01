@@ -1,13 +1,25 @@
-extends CanvasLayer
+extends Control
 
 @onready var coin_label: Label = $CoinLabel
 @export var player: Player;
 
+var debug = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	visible = debug
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("debug"):
+		debug = !debug
+		visible = debug
+	if !debug:
+		return
 	coin_label.text = str(player.inventory.coins) + " coins"
+
+
+func _on_coin_button_pressed() -> void:
+	var coin = Item.new("coin")
+	coin.count = 1000
+	player.inventory.add(coin)

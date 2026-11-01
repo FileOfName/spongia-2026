@@ -4,7 +4,15 @@
 [ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="2_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://gnmc6doeugtd" path="res://entity/player/player.tscn" id="3_8mm7a"]
 [ext_resource type="PackedScene" uid="uid://b76jchf8mf70n" path="res://entity/enemy/goblin.tscn" id="4_d5x1h"]
+[ext_resource type="Script" uid="uid://igrv05fr8r0s" path="res://hud.gd" id="5_7ycvg"]
 [ext_resource type="Script" uid="uid://of5y4wiyceil" path="res://debug_info.gd" id="5_8mm7a"]
+[ext_resource type="PackedScene" uid="uid://bilvmgvc1esl1" path="res://health_bar/health_bar.tscn" id="6_66tet"]
+[ext_resource type="Texture2D" uid="uid://caoikjcqthp3k" path="res://assets/ui/coin.png" id="7_7ycvg"]
+[ext_resource type="FontFile" uid="uid://dkv8cricpcdsu" path="res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf" id="8_wr18j"]
+
+[sub_resource type="Theme" id="Theme_t2471"]
+default_font_size = 32
+Label/colors/font_color = Color(0.9999847, 0.15619686, 0.99999994, 1)
 
 [node name="MainScene" type="Node2D" unique_id=1857006203]
 
@@ -29,10 +37,77 @@ position = Vector2(720, 205)
 [node name="Goblin2" parent="." unique_id=504197657 instance=ExtResource("4_d5x1h")]
 position = Vector2(674, 278)
 
-[node name="DebugInfo" type="CanvasLayer" parent="." unique_id=250823104 node_paths=PackedStringArray("player")]
-script = ExtResource("5_8mm7a")
-player = NodePath("../Player")
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1167556653]
 
-[node name="CoinLabel" type="Label" parent="DebugInfo" unique_id=1636654386]
+[node name="Control" type="Control" parent="HUD" unique_id=272116386 node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 88.0
+offset_bottom = 88.0
+script = ExtResource("5_7ycvg")
+player = NodePath("../../Player")
+
+[node name="HealthBar" parent="HUD/Control" unique_id=102016543 node_paths=PackedStringArray("entity") instance=ExtResource("6_66tet")]
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 96.0
+offset_bottom = 14.0
+grow_vertical = 1
+pivot_offset_ratio = Vector2(0, 0)
+entity = NodePath("../../../Player")
+
+[node name="CoinIcon" type="TextureRect" parent="HUD/Control" unique_id=1398216639]
+layout_mode = 0
+offset_top = 52.0
+offset_right = 16.0
+offset_bottom = 68.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_7ycvg")
+
+[node name="Coins" type="Label" parent="HUD/Control" unique_id=1651341301]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 44.0
+offset_right = 130.0
+offset_bottom = 85.0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("8_wr18j")
+theme_override_font_sizes/font_size = 32
+text = "9999"
+
+[node name="DebugInfo" type="CanvasLayer" parent="." unique_id=250823104]
+
+[node name="Control" type="Control" parent="DebugInfo" unique_id=1388267658 node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme = SubResource("Theme_t2471")
+script = ExtResource("5_8mm7a")
+player = NodePath("../../Player")
+
+[node name="CoinLabel" type="Label" parent="DebugInfo/Control" unique_id=1636654386]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+text = "Coin Label"
+
+[node name="CoinBtn" type="Button" parent="DebugInfo/Control" unique_id=118044010]
+layout_mode = 0
+offset_left = 180.0
+offset_top = -3.0
+offset_right = 427.0
+offset_bottom = 50.0
+text = "Give 1000 coins"
+
+[connection signal="pressed" from="DebugInfo/Control/CoinBtn" to="DebugInfo/Control" method="_on_coin_button_pressed"]
