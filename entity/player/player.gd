@@ -61,29 +61,8 @@ func _physics_process(delta: float) -> void:
 			attack_cooldown = _held.cooldown-0.5
 		if _t_cas > 0.0:
 			_zastav_stav()
-
-	if _t_cas > 0.0:
-		if _held.typ=="sekera":
-			_t_cas -= delta
-			_otocas-=delta
-			$Sprite2D.rotation += TAU / _held.cas * delta * _held.spin_rotations
-			if _otocas<=0.0:
-				_otocas=_held.cas/_held.spin_rotations
-				_rachnute.clear()
-				var ring := Whoosh.make(Whoosh.Kind.RING, 0.0, _held.spin_radius, _held.whoosh_color)
-				_show_whoosh(ring)
-				var supa := CircleShape2D.new()
-				supa.radius = _held.spin_radius
-				_hit_shape(supa, Transform2D(0.0, global_position), _held.spin_damage, _rachnute)
-			if _t_cas<=0:
-				_zastav_stav()
-		if _held.typ=="dyka":
-			_t_cas -= delta
-			if _t_cas<=0:
-				_zastav_stav()
-		$SwordHitBox/Sprite2D.texture=load("res://assets/zbrane/"+_held.typ+".png")
 	if _held!=null:
-
+		$SwordHitBox/Sprite2D.texture=load("res://assets/zbrane/"+_held.typ+".png")
 		#namierenie:
 		var tmp =_aim_angle()
 		if _held.typ!="idkasinetreba":
