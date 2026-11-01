@@ -56,9 +56,9 @@ shape = SubResource("RectangleShape2D_0ps6c")
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1475654955]
 texture = ExtResource("3_coama")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=126265457 node_paths=PackedStringArray("player")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=126265457 node_paths=PackedStringArray("target")]
 script = ExtResource("4_i178h")
-player = NodePath("../Player")
+target = NodePath("../Player")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=746800742]
 
