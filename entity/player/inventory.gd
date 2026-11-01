@@ -6,6 +6,9 @@ const SLOTS := 4
 const SLOT_SIZE := 64.0
 const GAP := 8.0
 const MARGIN := 16.0
+var slot_texture: Texture2D = load("res://assets/ui/nine_patch.png")
+var slot_texture_selected: Texture2D = load("res://assets/ui/nine_patch_selected.png")
+var font: Font = load("res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf")
 
 var coins = 0
 var items: Array[Item] = [null, null, null, null]   # one Item (a stack) per slot, null = empty
@@ -103,17 +106,25 @@ func from_dict(data: Dictionary) -> void:
 
 ## Draws the 4 slots at the bottom of the screen. The selected slot has a bright border.
 func _draw() -> void:
-	var font := ThemeDB.fallback_font
 	var total := SLOTS * SLOT_SIZE + (SLOTS - 1) * GAP
 	var origin := Vector2((size.x - total) / 2.0, size.y - SLOT_SIZE - MARGIN)
+
+	var style_box = StyleBoxTexture.new()
+	style_box.texture = slot_texture
+	style_box.set_texture_margin_all(18)
+
+	var style_box_selected = StyleBoxTexture.new()
+	style_box_selected.texture = slot_texture_selected
+	style_box_selected.set_texture_margin_all(18)
 
 	for i in SLOTS:
 		var rect := Rect2(origin + Vector2(i * (SLOT_SIZE + GAP), 0.0), Vector2(SLOT_SIZE, SLOT_SIZE))
 		var is_selected := i == selected
 
-		draw_rect(rect, Color(0, 0, 0, 0.55))
-		draw_rect(rect, Color.WHITE if is_selected else Color(1, 1, 1, 0.3), false, 3.0 if is_selected else 1.0)
-		draw_string(font, rect.position + Vector2(5, 15), str(i + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(1, 1, 1, 0.6))
+		# draw_rect(rect, Color(0, 0, 0, 0.55))
+		# draw_rect(rect, Color.WHITE if is_selected else Color(1, 1, 1, 0.3), false, 3.0 if is_selected else 1.0)
+		draw_style_box(style_box_selected if is_selected else style_box, rect)
+		draw_string(font, rect.position + Vector2(10, 20), str(i + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(1, 1, 1, 0.6))
 
 		var item := items[i]
 		if item == null:
@@ -121,7 +132,7 @@ func _draw() -> void:
 
 		# the item's own color, with a text color that stays readable on it
 		var text_color := Color.BLACK if item.color.get_luminance() > 0.5 else Color.WHITE
-		draw_rect(rect.grow(-10.0), item.color)
+		# draw_rect(rect.grow(-10.0), item.color)
 		draw_string(font, Vector2(rect.position.x, rect.position.y + SLOT_SIZE * 0.58), item.display_name, HORIZONTAL_ALIGNMENT_CENTER, SLOT_SIZE, 13, text_color)
 
 		if item.max_stack > 1:
