@@ -37,6 +37,21 @@ position = Vector2(720, 205)
 [node name="Goblin2" parent="." unique_id=504197657 instance=ExtResource("4_d5x1h")]
 position = Vector2(674, 278)
 
+[node name="Goblin3" parent="." unique_id=1084020853 instance=ExtResource("4_d5x1h")]
+position = Vector2(571, 405)
+
+[node name="Goblin4" parent="." unique_id=482097049 instance=ExtResource("4_d5x1h")]
+position = Vector2(806, 462)
+
+[node name="Goblin5" parent="." unique_id=855453711 instance=ExtResource("4_d5x1h")]
+position = Vector2(771, 682)
+
+[node name="Goblin6" parent="." unique_id=1369044777 instance=ExtResource("4_d5x1h")]
+position = Vector2(892, 203)
+
+[node name="Goblin7" parent="." unique_id=1807349433 instance=ExtResource("4_d5x1h")]
+position = Vector2(990, 747)
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1167556653]
 
 [node name="Control" type="Control" parent="HUD" unique_id=272116386 node_paths=PackedStringArray("player")]
