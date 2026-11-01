@@ -40,6 +40,7 @@ func _on_enter_area_entered(body: Node2D) -> void:
 func _on_exit_area_exited(body: Node2D) -> void:
 	if body is Player:
 		target = null
+		nav_agent.target_position = global_position
 
 func _on_hit_area_entered(body: Node2D) -> void:
 	# ano, asi by som mal pouzit to co pouziva player, ale s tym sa mi nechce hrat, bite me
