@@ -10,6 +10,10 @@ extends Entity
 @export var ATTACK_COOLDOWN: float = 1
 @export var WHOOSH_ARC = 120
 @export var WHOOSH_COLOR = Color(1, 1, 1)
+var odskoc := 0.0
+var odskocodpocet := 0.0
+var odskocpriestor := Vector2.ZERO
+var _stuck_time := 0.0
 
 var is_chasing = false
 var target: Player = null
@@ -17,6 +21,11 @@ var _wander_delay = 0
 var _attack_cooldown = 0
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var hit_area: Area2D = $HitArea
+func hod_stuck(kolko: float, okolko: float, kade: Vector2, cas: float) -> void:
+	odskoc = kolko
+	odskocodpocet = okolko
+	odskocpriestor = kade.normalized()
+	_stuck_time = cas
 
 func _ready() -> void:
 	$NavigationAgent2D.radius = $CollisionShape2D.shape.radius
@@ -45,7 +54,7 @@ func _process(delta: float) -> void:
 				_hit(b)
 
 func _hit(player: Player):
-	if health == 0 || _attack_cooldown != 0:
+	if health == 0 || _attack_cooldown != 0 || _stuck_time > 0.0:
 		return
 	player.damage(DAMAGE)
 	_attack_cooldown = ATTACK_COOLDOWN
@@ -65,7 +74,12 @@ func _death_anim_finished():
 func _physics_process(delta: float) -> void:
 	if health == 0:
 		return
-
+	if odskoc > 0.0 or _stuck_time > 0.0:
+		velocity = odskocpriestor * odskoc
+		odskoc = maxf(odskoc - odskocodpocet * delta, 0.0)
+		_stuck_time = maxf(_stuck_time - delta, 0.0)
+		move_and_slide()
+		return
 	if target != null:
 		nav_agent.target_position = target.global_position
 

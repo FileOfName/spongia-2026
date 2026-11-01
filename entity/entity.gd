@@ -39,7 +39,6 @@ func damage(amount: int):
 	var tween = create_tween()
 	tween.tween_property(SPRITE, "modulate", Color(1,1,1), INVULNERABILITY_SECONDS).set_trans(Tween.TRANS_SINE)
 
-
 func heal(amount: int):
 	health += amount
 

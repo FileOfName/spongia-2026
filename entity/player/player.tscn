@@ -11,6 +11,9 @@ size = Vector2(85, 78)
 [node name="Player" type="CharacterBody2D" unique_id=214714032 node_paths=PackedStringArray("SPRITE")]
 motion_mode = 1
 script = ExtResource("1_e6ar1")
+SPEED = null
+MAX_HEALTH = null
+INVULNERABILITY_SECONDS = null
 SPRITE = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=488023533]

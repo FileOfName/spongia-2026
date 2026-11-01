@@ -115,7 +115,7 @@ func _physics_process(delta: float) -> void:
 	if not new_velocity.y:
 		new_velocity.y = move_toward(velocity.y, 0, SPEED)
 	new_velocity+=odskocpriestor*odskoc*-1
-	odskoc=maxf(odskoc - odskocodpocet, 0.0)
+	odskoc=maxf(odskoc - odskocodpocet*delta, 0.0)
 	velocity = new_velocity
 	move_and_slide()
 
@@ -174,7 +174,7 @@ func _slam() -> void:
 		if body is Entity and body != self and not _rachnute.has(body):
 			_rachnute.append(body)
 			body.damage(_held.damage)
-			# send stun signal
+			body.hod_stuck(_held.tlac,_held.otlac,Vector2.from_angle(_aim_angle()),_held.zasek)
 
 func _start_spin() -> void:
 	_t_cas = _held.cas

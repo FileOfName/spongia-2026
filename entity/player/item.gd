@@ -42,8 +42,11 @@ const testy := {
 		"color": Color(0.6, 0.6, 0.65),
 		"cooldown": 1.2,
 		"damage": 70,
-		"odskoc": 240,
-		"odskocodpocet":60
+		"odskoc": 30,
+		"odskocodpocet":80,
+		"tlac":40,
+		"otlac":55,
+		"zasek":1.8
 	},
 	"kriak": {
 		"display_name": "Herb",
@@ -93,6 +96,9 @@ var slam_radius := 60.0
 #odskok
 var odskoc=0
 var odskocodpocet=0
+var tlac=0
+var otlac=0
+var zasek=0
 
 
 var heal := 30
