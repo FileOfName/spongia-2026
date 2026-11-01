@@ -1,0 +1,23 @@
+{
+"inventory": {
+"items": [{
+"count": 1,
+"overrides": {},
+"type": "mec"
+}, {
+"count": 1,
+"overrides": {},
+"type": "sek"
+}, {
+"count": 1,
+"overrides": {},
+"type": "luk"
+}, {
+"count": 1,
+"overrides": {},
+"type": "palcat"
+}],
+"selected": 3
+},
+"position": Vector2(-282.45602, 8.379368)
+}

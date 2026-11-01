@@ -61,34 +61,47 @@ func _physics_process(delta: float) -> void:
 			attack_cooldown = _held.cooldown-0.5
 		if _t_cas > 0.0:
 			_zastav_stav()
-	
-	if _t_cas > 0.0:
-		if _held.typ=="sekera":
-			_t_cas -= delta
-			_otocas-=delta
-			$Sprite2D.rotation += TAU / _held.cas * delta * _held.spin_rotations
-			if _otocas<=0.0:
-				_otocas=_held.cas/_held.spin_rotations
-				_rachnute.clear()
-				var ring := Whoosh.make(Whoosh.Kind.RING, 0.0, _held.spin_radius, _held.whoosh_color)
-				_show_whoosh(ring)
-				var supa := CircleShape2D.new()
-				supa.radius = _held.spin_radius
-				_hit_shape(supa, Transform2D(0.0, global_position), _held.spin_damage, _rachnute)
-			if _t_cas<=0:
-				_zastav_stav()
-		if _held.typ=="dyka":
-			_t_cas -= delta
-			if _t_cas<=0:
-				_zastav_stav()
+		$SwordHitBox/Sprite2D.texture=load("res://assets/zbrane/"+_held.typ+".png")
+	if _held!=null:
+		
+		#namierenie:
+		var tmp =_aim_angle()
+		if _held.typ!="idkasinetreba":
+			$SwordHitBox.rotation=tmp
+			#zrotovat ak je luk equipnuty aby to lepsie vyzeralo
+			if _held.typ!="luk":
+				if tmp>1.6 or tmp<-1.6:
+					$SwordHitBox/Sprite2D.rotation=2.6
+				else:
+					$SwordHitBox/Sprite2D.rotation=0.6
+			#dodat ak bude cas swing animaciu
+		if _t_cas > 0.0:
+			if _held.typ=="sekera":
+				_t_cas -= delta
+				_otocas-=delta
+				$Sprite2D.rotation += TAU / _held.cas * delta * _held.spin_rotations
+				if _otocas<=0.0:
+					_otocas=_held.cas/_held.spin_rotations
+					_rachnute.clear()
+					var ring := Whoosh.make(Whoosh.Kind.RING, 0.0, _held.spin_radius, _held.whoosh_color)
+					_show_whoosh(ring)
+					var supa := CircleShape2D.new()
+					supa.radius = _held.spin_radius
+					_hit_shape(supa, Transform2D(0.0, global_position), _held.spin_damage, _rachnute)
+				if _t_cas<=0:
+					_zastav_stav()
+			if _held.typ=="dyka":
+				_t_cas -= delta
+				if _t_cas<=0:
+					_zastav_stav()
 
-	var busy := _cakanka > 0.0 or _t_cas > 0.0
-	if held != null and attack_cooldown == 0.0 and not busy:
-		if _spin_requested and spin_cooldown == 0.0 and held.cas > 0.0:
-			_start_spin()
-		elif Input.is_action_just_pressed("attack"):
-			_use()
-	_spin_requested = false
+		var busy := _cakanka > 0.0 or _t_cas > 0.0
+		if attack_cooldown == 0.0 and not busy:
+			if _spin_requested and spin_cooldown == 0.0 and held.cas > 0.0:
+				_start_spin()
+			elif Input.is_action_just_pressed("attack"):
+				_use()
+		_spin_requested = false
 
 	var direction := Vector2.ZERO
 	if _cakanka <= 0.0:
@@ -116,9 +129,9 @@ func _use() -> void:
 		"idkasinetreba": _heal()	#indeed bolo treba
 
 func _melee() -> void:
-	var angle := _aim_angle()
-	var center := global_position + Vector2.from_angle(angle) * _held.hit_size.x / 2.0
-	var supa := RectangleShape2D.new()
+	var angle = _aim_angle()
+	var center = global_position
+	var supa = RectangleShape2D.new()
 	supa.size = _held.hit_size
 	_rachnute.clear()
 	_hit_shape(supa, Transform2D(angle, center), _held.damage, _rachnute)
@@ -128,7 +141,7 @@ func _melee() -> void:
 	_show_whoosh(whoosh)
 
 func _shoot() -> void:
-	var arrow := Arrow.new()
+	var arrow = Arrow.new()
 	arrow.setup(self, global_position, get_global_mouse_position(), _held.damage)
 	arrow.color = _held.whoosh_color
 	get_parent().add_child(arrow)

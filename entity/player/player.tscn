@@ -28,4 +28,9 @@ position = Vector2(79.5, 0)
 shape = SubResource("RectangleShape2D_4x1p8")
 disabled = true
 
+[node name="Sprite2D" type="Sprite2D" parent="SwordHitBox" unique_id=1222097417]
+position = Vector2(51, -3)
+rotation = 0.61086524
+scale = Vector2(3.1410823, 3.1410823)
+
 [connection signal="body_entered" from="SwordHitBox" to="." method="_on_sword_hit_box_body_entered"]
