@@ -4,21 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="2_i2agb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ps6c"]
-radius = 350.0
+radius = 80.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4x1p8"]
-radius = 500.0
+radius = 100.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t2471"]
-radius = 62.57
+radius = 8.062258
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ksy5"]
-radius = 74.0
 
 [node name="Goblin" type="CharacterBody2D" unique_id=176842737 node_paths=PackedStringArray("SPRITE")]
 motion_mode = 1
 script = ExtResource("1_suqdn")
-SPEED = 250.0
+SPEED = 100.0
 DAMAGE = 10
 ATTACK_COOLDOWN = 0.5
 WHOOSH_ARC = 90
@@ -37,6 +36,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_4x1p8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=598761116]
+scale = Vector2(0.12, 0.12)
 texture = ExtResource("2_i2agb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=933763264]

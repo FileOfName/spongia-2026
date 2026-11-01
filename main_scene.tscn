@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://djbj4io0alrba"]
+
+[ext_resource type="PackedScene" uid="uid://cgy5l4tp3a6ki" path="res://map/map.tscn" id="1_gyfs4"]
+[ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="2_d5x1h"]
+[ext_resource type="PackedScene" uid="uid://gnmc6doeugtd" path="res://entity/player/player.tscn" id="3_8mm7a"]
+[ext_resource type="PackedScene" uid="uid://b76jchf8mf70n" path="res://entity/enemy/goblin.tscn" id="4_d5x1h"]
+
+[node name="MainScene" type="Node2D" unique_id=1857006203]
+
+[node name="Map" parent="." unique_id=239738697 instance=ExtResource("1_gyfs4")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1772661912 node_paths=PackedStringArray("target")]
+position = Vector2(552, 163)
+scale = Vector2(0.2, 0.2)
+zoom = Vector2(3.585, 3.585)
+script = ExtResource("2_d5x1h")
+target = NodePath("../Player")
+SPEED = 7.0
+
+[node name="Player" parent="." unique_id=214714032 instance=ExtResource("3_8mm7a")]
+position = Vector2(545, 163)
+scale = Vector2(0.3, 0.3)
+SPEED = 100.0
+
+[node name="Goblin" parent="." unique_id=176842737 instance=ExtResource("4_d5x1h")]
+position = Vector2(720, 205)
+
+[node name="Goblin2" parent="." unique_id=504197657 instance=ExtResource("4_d5x1h")]
+position = Vector2(674, 278)
