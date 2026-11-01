@@ -16,6 +16,9 @@ var _t_cas =0.0
 var _rachnute=[]
 var _slam_center := Vector2.ZERO
 var _otocas=0.0
+var odskoc=0
+var odskocpriestor=Vector2.ZERO
+var odskocodpocet=0
 ## The player is never removed when dying.
 func death():
 	pass
@@ -65,15 +68,16 @@ func _physics_process(delta: float) -> void:
 		$SwordHitBox/Sprite2D.texture=load("res://assets/zbrane/"+_held.typ+".png")
 		#namierenie:
 		var tmp =_aim_angle()
-		if _held.typ!="idkasinetreba":
-			$SwordHitBox.rotation=tmp
-			#zrotovat ak je luk equipnuty aby to lepsie vyzeralo
+		$SwordHitBox.rotation=tmp
+		if _held.typ!="luk":
 			if _held.typ!="luk":
 				if tmp>1.6 or tmp<-1.6:
 					$SwordHitBox/Sprite2D.rotation=2.6
 				else:
 					$SwordHitBox/Sprite2D.rotation=0.6
 			#dodat ak bude cas swing animaciu
+		else:
+			$SwordHitBox/Sprite2D.rotation=0.0
 		if _t_cas > 0.0:
 			if _held.typ=="sekera":
 				_t_cas -= delta
@@ -114,12 +118,16 @@ func _physics_process(delta: float) -> void:
 		new_velocity.x = move_toward(velocity.x, 0, SPEED)
 	if not new_velocity.y:
 		new_velocity.y = move_toward(velocity.y, 0, SPEED)
-
+	new_velocity+=odskocpriestor*odskoc*-1
+	odskoc=maxf(odskoc - odskocodpocet, 0.0)
 	velocity = new_velocity
 	move_and_slide()
 
 func _use() -> void:
 	attack_cooldown = _held.cooldown
+	odskoc=_held.odskoc
+	odskocpriestor=Vector2.from_angle(_aim_angle())
+	odskocodpocet=_held.odskocodpocet
 	match _held.typ:
 		"mec": _melee()
 		"sekera": _melee()

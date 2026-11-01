@@ -85,6 +85,10 @@ var slam_reach := 50.0             # distance in front of the player where it la
 var slam_start_radius := 10.0 #iba vizualne
 var slam_radius := 70.0
 
+#odskok
+var odskoc=100
+var odskocodpocet=40
+
 
 var heal := 30
 
