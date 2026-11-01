@@ -254,3 +254,7 @@ func load_game() -> void:
 	global_position = data.get("position", global_position)
 	inventory.from_dict(data.get("inventory", {}))
 	# restore your Entity stats here, e.g. health = data.get("health", health)
+
+func _death():
+	#TODO:
+	pass
