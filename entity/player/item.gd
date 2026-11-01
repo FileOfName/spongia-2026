@@ -51,6 +51,9 @@ const testy := {
 		"max_stack": 10,
 		"heal": 25
 	},
+	"coin": {
+		"display_name": "Coin"
+	}
 }
 
 var type := ""                     # "sword", "axe", ... (a key of DEFAULTS)

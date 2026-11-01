@@ -17,7 +17,7 @@ var health:
 		_health = clamp(value, 0, MAX_HEALTH)
 		# the entity can technically die multiple times, will fix if its a problem
 		if _health == 0:
-			death()
+			_death()
 		health_changed.emit(_health)
 
 func is_invulnerable() -> bool:
@@ -51,19 +51,22 @@ func heal(amount: int):
 	_heal_tween = create_tween()
 	_heal_tween.tween_property(SPRITE, "modulate", Color(1,1,1), 0.4).set_trans(Tween.TRANS_SINE)
 
-func death():
+func _death():
 	var tween = create_tween()
 
 	tween.tween_property(SPRITE, "rotation_degrees", SPRITE.rotation_degrees - 90, 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(SPRITE, "modulate", Color(1, 0.5, 0.5, 0), 0.3).set_trans(Tween.TRANS_QUINT)
 
-	tween.finished.connect(queue_free)
+	tween.finished.connect(_death_anim_finished)
 
-func tick_invulnerability(delta: float):
+func _death_anim_finished():
+	queue_free()
+
+func _tick_invulnerability(delta: float):
 	_invulnerability = max(0, _invulnerability - delta)
 
 func _process(delta: float) -> void:
-	tick_invulnerability(delta)
+	_tick_invulnerability(delta)
 
 ## Shows a whoosh effect: on the entity (it follows them), or at a fixed world position.
 func _show_whoosh(whoosh: Whoosh, world_pos: Variant = null) -> void:

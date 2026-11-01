@@ -58,11 +58,16 @@ func _hit(player: Player):
 func damage(amount: int):
 	super.damage(amount)
 
+func _death_anim_finished():
+	super._death_anim_finished()
+	Pickup.drop(get_parent(), global_position, Item.new("coin"))
+
 func _physics_process(delta: float) -> void:
+	if health == 0:
+		return
 
 	if target != null:
 		nav_agent.target_position = target.global_position
-
 
 	if nav_agent.is_navigation_finished():
 		if target == null && _wander_delay == 0:

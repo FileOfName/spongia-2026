@@ -7,6 +7,7 @@ const SLOT_SIZE := 64.0
 const GAP := 8.0
 const MARGIN := 16.0
 
+var coins = 0
 var items: Array[Item] = [null, null, null, null]   # one Item (a stack) per slot, null = empty
 var selected := 0                                    # the slot currently in hand
 
@@ -43,6 +44,10 @@ func additem(type: String, n1 := "", v1: Variant = null, n2 := "", v2: Variant =
 
 ## Puts an item in the bar: first onto a matching stack, then into free slots. Returns how many did NOT fit.
 func add(item: Item) -> int:
+	if item.type == "coin":
+		coins += item.count
+		return 0
+
 	var left := item.count
 	for slot in items:
 		if left > 0 and slot != null and slot.same_as(item) and slot.count < slot.max_stack:
@@ -81,7 +86,7 @@ func to_dict() -> Dictionary:
 	var saved := []
 	for item in items:
 		saved.append(item.to_dict() if item else {})
-	return {"selected": selected, "items": saved}
+	return {"selected": selected, "items": saved, "coins": coins}
 
 
 ## Restores the inventory from saved data (see to_dict).
@@ -92,6 +97,7 @@ func from_dict(data: Dictionary) -> void:
 		if i < saved.size() and Item.testy.has(saved[i].get("type", "")):
 			items[i] = Item.from_dict(saved[i])
 	selected = clampi(data.get("selected", 0), 0, SLOTS - 1)
+	coins = data.get("coins", 0)
 	queue_redraw()
 
 

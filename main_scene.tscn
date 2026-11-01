@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="2_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://gnmc6doeugtd" path="res://entity/player/player.tscn" id="3_8mm7a"]
 [ext_resource type="PackedScene" uid="uid://b76jchf8mf70n" path="res://entity/enemy/goblin.tscn" id="4_d5x1h"]
+[ext_resource type="Script" uid="uid://of5y4wiyceil" path="res://debug_info.gd" id="5_8mm7a"]
 
 [node name="MainScene" type="Node2D" unique_id=1857006203]
 
@@ -27,3 +28,11 @@ position = Vector2(720, 205)
 
 [node name="Goblin2" parent="." unique_id=504197657 instance=ExtResource("4_d5x1h")]
 position = Vector2(674, 278)
+
+[node name="DebugInfo" type="CanvasLayer" parent="." unique_id=250823104 node_paths=PackedStringArray("player")]
+script = ExtResource("5_8mm7a")
+player = NodePath("../Player")
+
+[node name="CoinLabel" type="Label" parent="DebugInfo" unique_id=1636654386]
+offset_right = 40.0
+offset_bottom = 23.0

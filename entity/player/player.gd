@@ -20,7 +20,7 @@ var odskoc=0
 var odskocpriestor=Vector2.ZERO
 var odskocodpocet=0
 ## The player is never removed when dying.
-func death():
+func _death():
 	pass
 
 
