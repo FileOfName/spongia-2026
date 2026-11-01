@@ -2,18 +2,21 @@ class_name Pickup
 extends Area2D
 ## An item lying on the ground, drawn as a small square in the item's color.
 ## Walk over it to pick it up. It keeps all of its custom stats and its stack count.
+const DECELERATION = 80
 
 var item: Item
 var _delay := 0.0   # seconds before it can be picked up (so a dropped item isn't taken straight back)
 
 var _pickup_tween: Tween = null
+var _velocity := Vector2.ZERO
 
 ## Puts an item on the ground. `world` is the node it is added to (use get_parent() of the
 ## player/enemy, i.e. the level), `delay` is how long it can't be picked up.
-static func drop(world: Node, pos: Vector2, p_item: Item, delay := 0.0) -> Pickup:
+static func drop(world: Node, pos: Vector2, p_item: Item, delay := 0.0, throw_velocity: Vector2 = Vector2.ZERO) -> Pickup:
 	var pickup := Pickup.new()
 	pickup.item = p_item
 	pickup._delay = delay
+	pickup._velocity = throw_velocity
 	world.add_child(pickup)
 	pickup.global_position = pos
 	return pickup
@@ -35,6 +38,9 @@ func _physics_process(delta: float) -> void:
 	if _pickup_tween != null:
 		return
 
+	position -= _velocity * delta
+	_velocity = _velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
+
 	_delay -= delta
 	if _delay > 0.0:
 		return
@@ -43,7 +49,6 @@ func _physics_process(delta: float) -> void:
 			var left: int = body.inventory.add(item)
 			if left == 0:
 				_pickup_tween = create_tween()
-				print(_pickup_tween)
 				_pickup_tween.set_parallel(true).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 				_pickup_tween.tween_property(self, "scale", Vector2.ZERO, 0.2)
 				_pickup_tween.tween_property(self, "position", body.global_position, 0.2)

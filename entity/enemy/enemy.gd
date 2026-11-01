@@ -10,6 +10,9 @@ extends Entity
 @export var ATTACK_COOLDOWN: float = 1
 @export var WHOOSH_ARC = 120
 @export var WHOOSH_COLOR = Color(1, 1, 1)
+@export var MAX_COINS = 10
+@export var MIN_COINS = 2
+
 var odskoc := 0.0
 var odskocodpocet := 0.0
 var odskocpriestor := Vector2.ZERO
@@ -69,7 +72,8 @@ func damage(amount: int):
 
 func _death_anim_finished():
 	super._death_anim_finished()
-	Pickup.drop(get_parent(), global_position, Item.new("coin"))
+	for i in range(randi_range(MIN_COINS, MAX_COINS)):
+		Pickup.drop(get_parent(), global_position, Item.new("coin"), 0, Vector2.from_angle(randf() * 2 * PI) * 50)
 
 func _physics_process(delta: float) -> void:
 	if health == 0:
