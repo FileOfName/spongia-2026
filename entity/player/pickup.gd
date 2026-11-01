@@ -6,6 +6,7 @@ extends Area2D
 var item: Item
 var _delay := 0.0   # seconds before it can be picked up (so a dropped item isn't taken straight back)
 
+var _pickup_tween: Tween = null
 
 ## Puts an item on the ground. `world` is the node it is added to (use get_parent() of the
 ## player/enemy, i.e. the level), `delay` is how long it can't be picked up.
@@ -31,6 +32,9 @@ func _ready() -> void:
 
 ## After the delay, gives the item to the player standing on it. What doesn't fit stays on the ground.
 func _physics_process(delta: float) -> void:
+	if _pickup_tween != null:
+		return
+
 	_delay -= delta
 	if _delay > 0.0:
 		return
@@ -38,7 +42,12 @@ func _physics_process(delta: float) -> void:
 		if body is Player:
 			var left: int = body.inventory.add(item)
 			if left == 0:
-				queue_free()
+				_pickup_tween = create_tween()
+				print(_pickup_tween)
+				_pickup_tween.set_parallel(true).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+				_pickup_tween.tween_property(self, "scale", Vector2.ZERO, 0.2)
+				_pickup_tween.tween_property(self, "position", body.global_position, 0.2)
+				_pickup_tween.finished.connect(queue_free)
 			elif left != item.count:
 				item.count = left
 				queue_redraw()
@@ -50,6 +59,16 @@ func _draw() -> void:
 	var label := item.display_name
 	if item.max_stack > 1:
 		label += " x%d" % item.count
-	draw_rect(Rect2(-12, -12, 24, 24), item.color)
-	draw_rect(Rect2(-12, -12, 24, 24), Color(0, 0, 0, 0.6), false, 2.0)
-	draw_string(ThemeDB.fallback_font, Vector2(-40, -18), label, HORIZONTAL_ALIGNMENT_CENTER, 80, 12)
+	if item.texture:
+		var rect = Rect2(-12, -12, 24, 24)
+
+		var texture_size = item.texture.get_size()
+		var size_factor = rect.size / (max(texture_size.x , texture_size.y))
+		texture_size *= size_factor
+		var texture_position = rect.get_center() - (texture_size / 2)
+
+		draw_texture_rect(item.texture, Rect2(texture_position, texture_size), false)
+	else:
+		draw_rect(Rect2(-12, -12, 24, 24), item.color)
+		draw_rect(Rect2(-12, -12, 24, 24), Color(0, 0, 0, 0.6), false, 2.0)
+		draw_string(ThemeDB.fallback_font, Vector2(-40, -18), label, HORIZONTAL_ALIGNMENT_CENTER, 80, 12)

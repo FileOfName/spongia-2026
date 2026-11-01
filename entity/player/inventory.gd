@@ -133,7 +133,17 @@ func _draw() -> void:
 		# the item's own color, with a text color that stays readable on it
 		var text_color := Color.BLACK if item.color.get_luminance() > 0.5 else Color.WHITE
 		# draw_rect(rect.grow(-10.0), item.color)
-		draw_string(font, Vector2(rect.position.x, rect.position.y + SLOT_SIZE * 0.58), item.display_name, HORIZONTAL_ALIGNMENT_CENTER, SLOT_SIZE, 13, text_color)
+		if item.texture:
+			var texture_size = item.texture.get_size()
+			var size_factor = SLOT_SIZE / (max(texture_size.x , texture_size.y) + 12)
+			texture_size *= size_factor
+
+			var texture_position = rect.get_center() - (texture_size / 2)
+
+
+			draw_texture_rect(item.texture, Rect2(texture_position, texture_size), false)
+		else:
+			draw_string(font, Vector2(rect.position.x, rect.position.y + SLOT_SIZE * 0.58), item.display_name, HORIZONTAL_ALIGNMENT_CENTER, SLOT_SIZE, 13, text_color)
 
 		if item.max_stack > 1:
 			draw_string(font, Vector2(rect.position.x, rect.end.y - 6.0), "x%d" % item.count, HORIZONTAL_ALIGNMENT_RIGHT, SLOT_SIZE - 6.0, 14, Color.WHITE)

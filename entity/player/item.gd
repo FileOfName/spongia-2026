@@ -9,7 +9,8 @@ const testy := {
 		"cooldown": 0.35,
 		"damage": 30,
 		"hit_size": Vector2(72, 56),
-		"whoosh_arc": 120.0
+		"whoosh_arc": 120.0,
+		"texture_path": "res://assets/zbrane/mec.png"
 	},
 	"sek": {
 		"display_name": "Axe",
@@ -20,14 +21,16 @@ const testy := {
 		"hit_size": Vector2(52, 40),
 		"whoosh_arc": 80.0,
 		"cas": 1,
-		"spin_rotations" : 7
+		"spin_rotations" : 7,
+		"texture_path": "res://assets/zbrane/sekera.png"
 	},
 	"luk": {
 		"display_name": "Bow",
 		"typ" : "luk",
 		"color": Color(0.65, 0.5, 0.3),
 		"cooldown": 0.6,
-		"damage": 25
+		"damage": 25,
+		"texture_path": "res://assets/zbrane/luk.png"
 	},
 	"dyka": {
 		"display_name": "Dagger",
@@ -46,7 +49,8 @@ const testy := {
 		"odskocodpocet":80,
 		"tlac":40,
 		"otlac":55,
-		"zasek":1.8
+		"zasek":1.8,
+		"texture_path": "res://assets/zbrane/palcat.png"
 	},
 	"kriak": {
 		"display_name": "Herb",
@@ -57,7 +61,8 @@ const testy := {
 		"heal": 25
 	},
 	"coin": {
-		"display_name": "Coin"
+		"display_name": "Coin",
+		"texture_path": "res://assets/ui/coin.png"
 	}
 }
 
@@ -65,6 +70,8 @@ var type := ""                     # "sword", "axe", ... (a key of DEFAULTS)
 var count := 1                     # how many are in this stack
 var max_stack := 1                 # more than 1 = stackable (herbs)
 var display_name := "Item"
+var texture_path = null
+var texture: Texture2D = null
 var typ := "idk"
 var color := Color.WHITE           # color of the slot in the inventory bar
 var whoosh_color := Color.WHITE    # color of the swing / arrow / slam effects
@@ -122,6 +129,8 @@ func _init(p_type := "", p_overrides := {}) -> void:
 	overrides = p_overrides.duplicate()
 	overrides.erase("count")
 
+	if texture_path:
+		texture = load(texture_path)
 
 func same_as(other: Item) -> bool:
 	return type == other.type and overrides == other.overrides
