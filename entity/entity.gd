@@ -65,4 +65,13 @@ func tick_invulnerability(delta: float):
 func _process(delta: float) -> void:
 	tick_invulnerability(delta)
 
+## Shows a whoosh effect: on the entity (it follows them), or at a fixed world position.
+func _show_whoosh(whoosh: Whoosh, world_pos: Variant = null) -> void:
+	if world_pos == null:
+		add_child(whoosh)
+	else:
+		get_parent().add_child(whoosh)
+		whoosh.global_position = world_pos
+
+
 signal health_changed(health: int)

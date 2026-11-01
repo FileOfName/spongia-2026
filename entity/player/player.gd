@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	attack_cooldown = maxf(attack_cooldown - delta, 0.0)
 	spin_cooldown = maxf(spin_cooldown - delta, 0.0)
 	_cakanka = maxf(_cakanka - delta, 0.0)
-	
+
 	var held := inventory.selected_item()
 	if held != _held:
 		_held = held
@@ -61,9 +61,29 @@ func _physics_process(delta: float) -> void:
 			attack_cooldown = _held.cooldown-0.5
 		if _t_cas > 0.0:
 			_zastav_stav()
+
+	if _t_cas > 0.0:
+		if _held.typ=="sekera":
+			_t_cas -= delta
+			_otocas-=delta
+			$Sprite2D.rotation += TAU / _held.cas * delta * _held.spin_rotations
+			if _otocas<=0.0:
+				_otocas=_held.cas/_held.spin_rotations
+				_rachnute.clear()
+				var ring := Whoosh.make(Whoosh.Kind.RING, 0.0, _held.spin_radius, _held.whoosh_color)
+				_show_whoosh(ring)
+				var supa := CircleShape2D.new()
+				supa.radius = _held.spin_radius
+				_hit_shape(supa, Transform2D(0.0, global_position), _held.spin_damage, _rachnute)
+			if _t_cas<=0:
+				_zastav_stav()
+		if _held.typ=="dyka":
+			_t_cas -= delta
+			if _t_cas<=0:
+				_zastav_stav()
 		$SwordHitBox/Sprite2D.texture=load("res://assets/zbrane/"+_held.typ+".png")
 	if _held!=null:
-		
+
 		#namierenie:
 		var tmp =_aim_angle()
 		if _held.typ!="idkasinetreba":
@@ -145,7 +165,7 @@ func _shoot() -> void:
 	arrow.setup(self, global_position, get_global_mouse_position(), _held.damage)
 	arrow.color = _held.whoosh_color
 	get_parent().add_child(arrow)
-	
+
 func _heal() -> void:
 	inventory.remove_one(inventory.selected)
 	#Radko, toto je na tebe
@@ -172,7 +192,7 @@ func _slam() -> void:
 			_rachnute.append(body)
 			body.damage(_held.damage)
 			# send stun signal
-			
+
 func _start_spin() -> void:
 	_t_cas = _held.cas
 	_rachnute.clear()
@@ -208,17 +228,6 @@ func _hit_shape(shape: Shape2D, xform: Transform2D, amount: int, already_hit: Ar
 		if body is Entity and body != self and not already_hit.has(body):
 			already_hit.append(body)
 			body.damage(amount)
-
-
-## Shows a whoosh effect: on the player (it follows him), or at a fixed world position.
-func _show_whoosh(whoosh: Whoosh, world_pos: Variant = null) -> void:
-	if world_pos == null:
-		add_child(whoosh)
-	else:
-		get_parent().add_child(whoosh)
-		whoosh.global_position = world_pos
-
-
 
 ## Saves the game when the window is closed.
 func _notification(what: int) -> void:

@@ -6,6 +6,7 @@ const SPEED = 300.0
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 func _physics_process(delta: float) -> void:
+	return
 	var mouse = get_global_mouse_position()
 
 	nav_agent.target_position = mouse

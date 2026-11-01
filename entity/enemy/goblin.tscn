@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://b76jchf8mf70n"]
+
+[ext_resource type="Script" uid="uid://cp1pfkr4kcngt" path="res://entity/enemy/goblin.gd" id="1_suqdn"]
+[ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="2_i2agb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ps6c"]
+radius = 350.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4x1p8"]
+radius = 500.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t2471"]
+radius = 62.57
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ksy5"]
+radius = 74.0
+
+[node name="Goblin" type="CharacterBody2D" unique_id=176842737 node_paths=PackedStringArray("SPRITE")]
+motion_mode = 1
+script = ExtResource("1_suqdn")
+SPEED = 250.0
+DAMAGE = 10
+ATTACK_COOLDOWN = 0.5
+WHOOSH_ARC = 90
+SPRITE = NodePath("Sprite2D")
+
+[node name="EnterArea" type="Area2D" parent="." unique_id=647734369]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterArea" unique_id=1234998955]
+shape = SubResource("CircleShape2D_0ps6c")
+
+[node name="ExitArea" type="Area2D" parent="." unique_id=1460374740]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" unique_id=1707900034]
+shape = SubResource("CircleShape2D_4x1p8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=598761116]
+texture = ExtResource("2_i2agb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=933763264]
+shape = SubResource("CircleShape2D_t2471")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=481170914]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 90.0
+max_speed = 300.0
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="HitArea" type="Area2D" parent="." unique_id=1405983472]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=1653259447]
+shape = SubResource("CircleShape2D_3ksy5")
+debug_color = Color(0.97413296, 0, 0.4324148, 0.41960785)
+
+[connection signal="body_entered" from="EnterArea" to="." method="_on_enter_area_entered"]
+[connection signal="body_exited" from="ExitArea" to="." method="_on_exit_area_exited"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_entered"]

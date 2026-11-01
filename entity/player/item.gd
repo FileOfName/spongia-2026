@@ -65,7 +65,7 @@ var damage := 10
 var cas := 0.7
 
 # melee (sword, axe)
-var hit_size := Vector2(60, 50)    # starts at the player: length toward the cursor x width
+var hit_size := Vector2(60, 100)    # starts at the player: length toward the cursor x width # MISKO increasol som hit size - radko
 var whoosh_arc := 120.0            # width of the swing animation, in degrees
 
 var spin_cooldown :=8
