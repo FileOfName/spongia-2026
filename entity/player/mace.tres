@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Mace"
+color = Color(0.6, 0.6, 0.65, 1)
+kind = 3
+cooldown = 1.2
+damage = 70
+slam_reach = 50.0
+slam_start_radius = 10.0
+slam_radius = 70.0
+slam_time = 0.35
+root_time = 0.7
