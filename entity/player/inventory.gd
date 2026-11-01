@@ -136,7 +136,7 @@ func _draw() -> void:
 		if item.texture:
 			var texture_size = item.texture.get_size()
 			var size_factor = SLOT_SIZE / (max(texture_size.x , texture_size.y) + 12)
-			texture_size *= size_factor
+			texture_size *= size_factor * item.texture_scale
 
 			var texture_position = rect.get_center() - (texture_size / 2)
 

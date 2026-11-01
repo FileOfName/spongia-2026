@@ -8,7 +8,7 @@ const testy := {
 		"color": Color(0.7, 0.75, 0.85),
 		"cooldown": 0.35,
 		"damage": 30,
-		"hit_size": Vector2(72, 56),
+		"hit_size": Vector2(130, 56),
 		"whoosh_arc": 120.0,
 		"texture_path": "res://assets/zbrane/mec.png"
 	},
@@ -18,7 +18,7 @@ const testy := {
 		"color": Color(0.8, 0.5, 0.35),
 		"cooldown": 0.8,
 		"damage": 45,
-		"hit_size": Vector2(52, 40),
+		"hit_size": Vector2(110, 40),
 		"whoosh_arc": 80.0,
 		"cas": 1,
 		"spin_rotations" : 7,
@@ -62,7 +62,8 @@ const testy := {
 	},
 	"coin": {
 		"display_name": "Coin",
-		"texture_path": "res://assets/ui/coin.png"
+		"texture_path": "res://assets/ui/coin.png",
+		"texture_scale": 0.7
 	}
 }
 
@@ -72,6 +73,7 @@ var max_stack := 1                 # more than 1 = stackable (herbs)
 var display_name := "Item"
 var texture_path = null
 var texture: Texture2D = null
+var texture_scale = 1
 var typ := "idk"
 var color := Color.WHITE           # color of the slot in the inventory bar
 var whoosh_color := Color.WHITE    # color of the swing / arrow / slam effects

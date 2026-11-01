@@ -65,11 +65,11 @@ func _draw() -> void:
 	if item.max_stack > 1:
 		label += " x%d" % item.count
 	if item.texture:
-		var rect = Rect2(-12, -12, 24, 24)
+		var rect = Rect2(-24, -24, 48, 48)
 
 		var texture_size = item.texture.get_size()
 		var size_factor = rect.size / (max(texture_size.x , texture_size.y))
-		texture_size *= size_factor
+		texture_size *= size_factor * item.texture_scale
 		var texture_position = rect.get_center() - (texture_size / 2)
 
 		draw_texture_rect(item.texture, Rect2(texture_position, texture_size), false)

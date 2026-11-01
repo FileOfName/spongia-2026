@@ -35,8 +35,8 @@ texture = ExtResource("2_mm2fu")
 [sub_resource type="TileSet" id="TileSet_2okc1"]
 sources/0 = SubResource("TileSetAtlasSource_rck23")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
-size = Vector2(129, 131)
+[sub_resource type="CircleShape2D" id="CircleShape2D_mm2fu"]
+radius = 74.50168
 
 [node name="EntityTest" type="Node2D" unique_id=50392317]
 script = ExtResource("1_yulwx")
@@ -82,10 +82,11 @@ text = "dEFAULT"
 position = Vector2(0, 200)
 script = ExtResource("3_d6i6a")
 SPRITE = NodePath("Sprite2D")
+MAX_HEALTH = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=215638558]
 position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_0ps6c")
+shape = SubResource("CircleShape2D_mm2fu")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1475654955]
 texture = ExtResource("3_coama")

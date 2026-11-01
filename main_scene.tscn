@@ -17,40 +17,41 @@ Label/colors/font_color = Color(0.9999847, 0.15619686, 0.99999994, 1)
 [node name="MainScene" type="Node2D" unique_id=1857006203]
 
 [node name="Map" parent="." unique_id=239738697 instance=ExtResource("1_gyfs4")]
+scale = Vector2(3, 3)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1772661912 node_paths=PackedStringArray("target")]
-position = Vector2(552, 163)
+position = Vector2(1873.9999, 421.99997)
 scale = Vector2(0.2, 0.2)
-zoom = Vector2(3.585, 3.585)
 script = ExtResource("2_d5x1h")
 target = NodePath("../Player")
 SPEED = 7.0
 
 [node name="Player" parent="." unique_id=214714032 instance=ExtResource("3_8mm7a")]
-position = Vector2(545, 163)
-scale = Vector2(0.3, 0.3)
-SPEED = 100.0
+position = Vector2(1867, 422)
+SPEED = 200.0
+MAX_HEALTH = 100.0
+INVULNERABILITY_SECONDS = 0.2
 
 [node name="Goblin" parent="." unique_id=176842737 instance=ExtResource("4_d5x1h")]
-position = Vector2(720, 205)
+position = Vector2(2042, 464)
 
 [node name="Goblin2" parent="." unique_id=504197657 instance=ExtResource("4_d5x1h")]
-position = Vector2(674, 278)
+position = Vector2(1996, 537)
 
 [node name="Goblin3" parent="." unique_id=1084020853 instance=ExtResource("4_d5x1h")]
-position = Vector2(571, 405)
+position = Vector2(1893, 664)
 
 [node name="Goblin4" parent="." unique_id=482097049 instance=ExtResource("4_d5x1h")]
-position = Vector2(806, 462)
+position = Vector2(2128, 721)
 
 [node name="Goblin5" parent="." unique_id=855453711 instance=ExtResource("4_d5x1h")]
-position = Vector2(771, 682)
+position = Vector2(2093, 941)
 
 [node name="Goblin6" parent="." unique_id=1369044777 instance=ExtResource("4_d5x1h")]
-position = Vector2(892, 203)
+position = Vector2(2214, 462)
 
 [node name="Goblin7" parent="." unique_id=1807349433 instance=ExtResource("4_d5x1h")]
-position = Vector2(990, 747)
+position = Vector2(2312, 1006)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1167556653]
 
@@ -88,13 +89,13 @@ texture = ExtResource("7_7ycvg")
 [node name="Coins" type="Label" parent="HUD/Control" unique_id=1651341301]
 layout_mode = 0
 offset_left = 34.0
-offset_top = 44.0
+offset_top = 45.0
 offset_right = 130.0
-offset_bottom = 85.0
+offset_bottom = 86.0
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("8_wr18j")
 theme_override_font_sizes/font_size = 32
-text = "9999"
+text = "20"
 
 [node name="DebugInfo" type="CanvasLayer" parent="." unique_id=250823104]
 
