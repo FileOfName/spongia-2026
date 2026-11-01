@@ -19,12 +19,8 @@ var _otocas=0.0
 var odskoc=0
 var odskocpriestor=Vector2.ZERO
 var odskocodpocet=0
-## The player is never removed when dying.
-func _death():
-	pass
 
 
-## Puts the inventory bar on the screen and loads the save file (or the starting items).
 func _ready() -> void:
 
 	var layer := CanvasLayer.new()

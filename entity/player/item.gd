@@ -41,7 +41,9 @@ const testy := {
 		"typ": "palcat",
 		"color": Color(0.6, 0.6, 0.65),
 		"cooldown": 1.2,
-		"damage": 70
+		"damage": 70,
+		"odskoc": 240,
+		"odskocodpocet":60
 	},
 	"kriak": {
 		"display_name": "Herb",
@@ -86,11 +88,11 @@ var dash_radius := 24.0
 # palalallalalalalalalaaacaaaat
 var slam_reach := 50.0             # distance in front of the player where it lands
 var slam_start_radius := 10.0 #iba vizualne
-var slam_radius := 70.0
+var slam_radius := 60.0
 
 #odskok
-var odskoc=100
-var odskocodpocet=40
+var odskoc=0
+var odskocodpocet=0
 
 
 var heal := 30
