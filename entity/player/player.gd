@@ -231,32 +231,42 @@ static func _save_path() -> String:
 	return dir.path_join("savegame.txt")
 
 
-## Writes position and inventory to the save file.
+## The whole save file as a Dictionary, or null if there is none yet. The enemy spawner uses it too.
+static func read_save() -> Variant:
+	if not FileAccess.file_exists(_save_path()):
+		return null
+	var data: Variant = str_to_var(FileAccess.get_file_as_string(_save_path()))
+	return data if data is Dictionary else null
+
+
+## Writes position, inventory and all living enemies to the save file.
 func save_game() -> void:
 	var file := FileAccess.open(_save_path(), FileAccess.WRITE)
 	if file == null:
 		push_error("Could not write the save file")
 		return
+	var enemies := []
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if enemy.health > 0:
+			enemies.append(enemy.to_dict())
 	file.store_string(var_to_str({
 		"position": global_position,                 # remove if you rebuild the level on load
 		"inventory": inventory.to_dict(),
+		"enemies": enemies,
 		# add your Entity stats here, e.g. "health": health,
 	}))
 
 
 ## Loads the save file, or gives the starting items if there is none yet.
 func load_game() -> void:
-	var data: Variant = null
-	if FileAccess.file_exists(_save_path()):
-		data = str_to_var(FileAccess.get_file_as_string(_save_path()))
-	if not (data is Dictionary):
+	var data: Variant = read_save()
+	if data == null:
 		inventory.additem("mec")
 		inventory.additem("sek")
 		inventory.additem("luk")
 		#inventory.additem("dyka")
 		#inventory.additem("kriak")
 		inventory.additem("palcat")
-		print("spusta sa")
 		return
 	global_position = data.get("position", global_position)
 	inventory.from_dict(data.get("inventory", {}))
