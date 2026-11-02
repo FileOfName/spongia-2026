@@ -22,7 +22,7 @@ noise = SubResource("FastNoiseLite_4x1p8")
 color_ramp = SubResource("Gradient_dybwn")
 seamless = true
 
-[node name="Intro" type="CanvasLayer" unique_id=402684537]
+[node name="Intro2" type="CanvasLayer" unique_id=402684537]
 script = ExtResource("1_klphw")
 SKIP_TIME = 1.0
 NEXT_SCENE = ExtResource("2_w5ohr")
@@ -73,7 +73,7 @@ text = "movement : WASD , drop : g attack : mouse/e"
 
 [node name="IntroLabel6" parent="Content" unique_id=1557153073 instance=ExtResource("2_0i8ga")]
 layout_mode = 2
-text = "slot machines cost 20 gold , good luck..."
+text = "slot machine = 20 gold, campfires heal, good luck..."
 
 [node name="Button" type="Button" parent="." unique_id=1180072193]
 anchors_preset = 3
