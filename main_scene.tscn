@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://dkv8cricpcdsu" path="res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf" id="8_wr18j"]
 [ext_resource type="PackedScene" uid="uid://dtjwyryaa8jdt" path="res://assets/ui/death_screen/death_screen.tscn" id="10_wr18j"]
 [ext_resource type="PackedScene" uid="uid://c40srmgy34i4" path="res://entity/enemy/elf.tscn" id="12_671wp"]
+[ext_resource type="PackedScene" uid="uid://dmb5tm8t6aplh" path="res://assets/slot_machine/slot_machine.tscn" id="13_mo76n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
 size = Vector2(8, 1648)
@@ -148,6 +149,20 @@ theme_override_fonts/font = ExtResource("8_wr18j")
 theme_override_font_sizes/font_size = 32
 text = "20"
 
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Control" unique_id=470976161]
+layout_mode = 0
+offset_top = 94.0
+offset_right = 142.0
+offset_bottom = 140.0
+
+[node name="Label" type="Label" parent="HUD/Control/VBoxContainer" unique_id=2034656889]
+layout_mode = 2
+text = "damage: 23"
+
+[node name="Label2" type="Label" parent="HUD/Control/VBoxContainer" unique_id=1799072580]
+layout_mode = 2
+text = "cooldown: 0.4"
+
 [node name="DeathScreen" parent="." unique_id=417257562 instance=ExtResource("10_wr18j")]
 visible = false
 
@@ -191,8 +206,8 @@ text = "KILL PLAYER"
 [node name="Elf" parent="." unique_id=1782117420 instance=ExtResource("12_671wp")]
 position = Vector2(1388, 559)
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1496559709]
-position = Vector2(9400, 6584)
+[node name="SlotMachine" parent="." unique_id=1748506954 instance=ExtResource("13_mo76n")]
+position = Vector2(3106, 134)
 
 [connection signal="on_death" from="Player" to="DeathScreen" method="show_death_screen"]
 [connection signal="pressed" from="DebugInfo/Control/CoinBtn" to="DebugInfo/Control" method="_on_coin_button_pressed"]

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dmb5tm8t6aplh"]
+
+[ext_resource type="Script" uid="uid://dei76s4xewios" path="res://assets/slot_machine/slot_machine.gd" id="1_5pe8q"]
+[ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="2_bsd7q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ps6c"]
+radius = 55.108982
+
+[node name="SlotMachine" type="Node2D" unique_id=1748506954]
+script = ExtResource("1_5pe8q")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=636324801]
+scale = Vector2(0.455, 0.455)
+texture = ExtResource("2_bsd7q")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1088703452]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=569192038]
+scale = Vector2(2.96, 2.96)
+shape = SubResource("RectangleShape2D_0ps6c")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1122901139]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=811320220]
+shape = SubResource("CircleShape2D_0ps6c")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
