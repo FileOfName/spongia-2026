@@ -108,7 +108,7 @@ MIN_TOP_LEFT = Vector2(-8, -8)
 MAX_BOTTOM_RIGHT = Vector2(9400, 6584)
 
 [node name="Player" parent="." unique_id=214714032 instance=ExtResource("3_8mm7a")]
-position = Vector2(2831, 1282)
+position = Vector2(3637, 985)
 SPEED = 200.0
 MAX_HEALTH = 200.0
 INVULNERABILITY_SECONDS = 0.2
