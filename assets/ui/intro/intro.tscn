@@ -53,26 +53,27 @@ grow_vertical = 2
 
 [node name="IntroLabel" parent="Content" unique_id=2080240990 instance=ExtResource("2_0i8ga")]
 layout_mode = 2
+text = "One Ring to rule them all, One Ring to find them,"
 
 [node name="IntroLabel2" parent="Content" unique_id=32365343 instance=ExtResource("2_0i8ga")]
 layout_mode = 2
-text = "Longer line of text"
+text = "One Ring to bring them all"
 
 [node name="IntroLabel3" parent="Content" unique_id=1934093557 instance=ExtResource("2_0i8ga")]
 layout_mode = 2
-text = "even LONGER line of text"
+text = "and in the darkness bind them..."
 
 [node name="IntroLabel4" parent="Content" unique_id=1227849826 instance=ExtResource("2_0i8ga")]
 layout_mode = 2
-text = "mad text >:("
+text = "Collect all five rings for the lord of darkness"
 
 [node name="IntroLabel5" parent="Content" unique_id=1979287515 instance=ExtResource("2_0i8ga")]
 layout_mode = 2
-text = "among uss"
+text = "movement : WASD , drop : g attack : mouse/e"
 
 [node name="IntroLabel6" parent="Content" unique_id=1557153073 instance=ExtResource("2_0i8ga")]
 layout_mode = 2
-text = "HELLO WORLD"
+text = "slot machines cost 20 gold , good luck..."
 
 [node name="Button" type="Button" parent="." unique_id=1180072193]
 anchors_preset = 3

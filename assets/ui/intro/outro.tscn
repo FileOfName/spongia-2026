@@ -53,27 +53,27 @@ grow_vertical = 2
 
 [node name="IntroLabel" parent="Content" unique_id=2080240990 instance=ExtResource("3_4w5w3")]
 layout_mode = 2
-text = "OUtro Line of text"
+text = "your mission is complete..."
 
 [node name="IntroLabel2" parent="Content" unique_id=32365343 instance=ExtResource("3_4w5w3")]
 layout_mode = 2
-text = "Longer line of text"
+text = "now youre free"
 
 [node name="IntroLabel3" parent="Content" unique_id=1934093557 instance=ExtResource("3_4w5w3")]
 layout_mode = 2
-text = "even LONGER line of text"
+text = "the lord of darkness is pleased"
 
 [node name="IntroLabel4" parent="Content" unique_id=1227849826 instance=ExtResource("3_4w5w3")]
 layout_mode = 2
-text = "mad text >:("
+text = "middle earth is now in his power."
 
 [node name="IntroLabel5" parent="Content" unique_id=1979287515 instance=ExtResource("3_4w5w3")]
 layout_mode = 2
-text = "among uss"
+text = "hope youre happy..."
 
 [node name="IntroLabel6" parent="Content" unique_id=1557153073 instance=ExtResource("3_4w5w3")]
 layout_mode = 2
-text = "HELLO WORLD"
+text = "...the end..."
 
 [node name="Button" type="Button" parent="." unique_id=1180072193]
 anchors_preset = 3
