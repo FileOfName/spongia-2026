@@ -35,15 +35,15 @@ func _restore(saved: Array) -> void:
 	for d in saved:
 		if not ResourceLoader.exists(d["scene"]):
 			continue
-			var enemy := _make_enemy(d["position"], d["scene"])
-			var party: EnemyParty = null
-			if d["party"] >= 0:
-				if not parties.has(d["party"]):
-					parties[d["party"]] = EnemyParty.new()
-					parties[d["party"]].id = d["party"]
-					party = parties[d["party"]]
-					enemy.setup(d["base"], party)
-					enemy.from_dict(d)
+		var enemy := _make_enemy(d["position"], d["scene"])
+		var party: EnemyParty = null
+		if d["party"] >= 0:
+			if not parties.has(d["party"]):
+				parties[d["party"]] = EnemyParty.new()
+				parties[d["party"]].id = d["party"]
+			party = parties[d["party"]]
+		enemy.setup(d["base"], party)
+		enemy.from_dict(d)
 
 #prinovej
 #zozber
@@ -94,7 +94,4 @@ func _make_enemy(pos: Vector2, scene_path := "") -> Enemy:
 	
 func _spawn_when_map_loaded() -> void:
 	await get_tree().process_frame
-	var scene = get_tree().current_scene
-	if scene == null or scene.scene_file_path.get_file() != MAP_FILE:
-		print("teraz tiezzjavne")
 	_spawn()

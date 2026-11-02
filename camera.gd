@@ -44,7 +44,7 @@ void fragment() {
 """
 var textura=load("res://assets/ui/prsten.png")
 
-var kolko_farebne = 5:
+var kolko_farebne = 0:
 	set(value):
 		kolko_farebne = clampi(value, 0, kolko)
 		_update_icons()
