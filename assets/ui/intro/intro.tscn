@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://bfnw6tiisrfqu" path="res://assets/ui/death_screen/death.gdshader" id="1_dybwn"]
 [ext_resource type="Script" uid="uid://wu6llm6flcty" path="res://assets/ui/intro/intro.gd" id="1_klphw"]
 [ext_resource type="PackedScene" uid="uid://bck33nqeo4nu8" path="res://assets/ui/intro/intro_label.tscn" id="2_0i8ga"]
+[ext_resource type="PackedScene" uid="uid://djbj4io0alrba" path="res://main_scene.tscn" id="2_w5ohr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t2471"]
 shader = ExtResource("1_dybwn")
@@ -11,18 +12,20 @@ shader_parameter/scroll = Vector2(0.1, 0.1)
 shader_parameter/alpha = 1.0
 
 [sub_resource type="Gradient" id="Gradient_dybwn"]
-offsets = PackedFloat32Array(0, 0.14117648, 1)
-colors = PackedColorArray(0.23132503, 0.028084967, 0.43092287, 1, 0.3375587, 0.022456365, 0.29908156, 1, 0.043039158, 0.04303915, 0.04303915, 1)
+offsets = PackedFloat32Array(0, 0.22941177, 1)
+colors = PackedColorArray(0.2969172, 0.046691395, 0.54203796, 1, 0.41560856, 0.09728197, 0.6176803, 1, 0.14406255, 0.14406255, 0.14406249, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4x1p8"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0ps6c"]
 noise = SubResource("FastNoiseLite_4x1p8")
 color_ramp = SubResource("Gradient_dybwn")
+seamless = true
 
 [node name="Intro" type="CanvasLayer" unique_id=402684537]
 script = ExtResource("1_klphw")
 SKIP_TIME = 1.0
+NEXT_SCENE = ExtResource("2_w5ohr")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1086176753]
 material = SubResource("ShaderMaterial_t2471")
@@ -71,7 +74,7 @@ text = "among uss"
 layout_mode = 2
 text = "HELLO WORLD"
 
-[node name="ContinueButton" type="Button" parent="." unique_id=1180072193]
+[node name="Button" type="Button" parent="." unique_id=1180072193]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -85,4 +88,4 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "continue"
 
-[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

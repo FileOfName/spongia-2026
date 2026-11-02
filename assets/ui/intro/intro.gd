@@ -2,17 +2,18 @@ extends CanvasLayer
 
 @export var SKIP_TIME := 2.0
 @export var SKIP_COUNT := 10
+@export var NEXT_SCENE: PackedScene
 
 
 @onready var content: VBoxContainer = $Content
-@onready var continue_button: Button = $ContinueButton
+@onready var button: Button = $Button
 
 var _skip_time := 0.0
 var _skip_count := 0
 var _tween: Tween;
 
 func _get_animating_children():
-	return content.get_children() + [continue_button]
+	return content.get_children() + [button]
 
 
 func _ready() -> void:
@@ -52,5 +53,5 @@ func _process(delta: float) -> void:
 			skip()
 
 
-func _on_continue_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://main_scene.tscn")
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_packed(NEXT_SCENE)

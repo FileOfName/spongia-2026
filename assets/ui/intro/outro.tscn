@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://4l8a48fhq141"]
+
+[ext_resource type="Script" uid="uid://wu6llm6flcty" path="res://assets/ui/intro/intro.gd" id="1_n35fj"]
+[ext_resource type="PackedScene" uid="uid://ike85kn20t0e" path="res://assets/ui/main_menu/main_menu.tscn" id="2_4w5w3"]
+[ext_resource type="Shader" uid="uid://bfnw6tiisrfqu" path="res://assets/ui/death_screen/death.gdshader" id="2_e0kwx"]
+[ext_resource type="PackedScene" uid="uid://bck33nqeo4nu8" path="res://assets/ui/intro/intro_label.tscn" id="3_4w5w3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2471"]
+shader = ExtResource("2_e0kwx")
+shader_parameter/scale = Vector2(1.5, 1.5)
+shader_parameter/scroll = Vector2(0.1, 0.1)
+shader_parameter/alpha = 1.0
+
+[sub_resource type="Gradient" id="Gradient_dybwn"]
+offsets = PackedFloat32Array(0, 0.14117648, 0.2529412, 0.32941177, 1)
+colors = PackedColorArray(0.23132503, 0.028084967, 0.43092287, 1, 0.3375587, 0.022456365, 0.29908156, 1, 0.99910444, 0.661907, 0.3902632, 1, 0.7070009, 0.3083555, 0.27441782, 1, 0.043039158, 0.04303915, 0.04303915, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4x1p8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0ps6c"]
+noise = SubResource("FastNoiseLite_4x1p8")
+color_ramp = SubResource("Gradient_dybwn")
+seamless = true
+
+[node name="Intro" type="CanvasLayer" unique_id=402684537]
+script = ExtResource("1_n35fj")
+SKIP_TIME = 1.0
+NEXT_SCENE = ExtResource("2_4w5w3")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1086176753]
+material = SubResource("ShaderMaterial_t2471")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_0ps6c")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=1006154610]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -60.5
+offset_right = 118.0
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IntroLabel" parent="Content" unique_id=2080240990 instance=ExtResource("3_4w5w3")]
+layout_mode = 2
+text = "OUtro Line of text"
+
+[node name="IntroLabel2" parent="Content" unique_id=32365343 instance=ExtResource("3_4w5w3")]
+layout_mode = 2
+text = "Longer line of text"
+
+[node name="IntroLabel3" parent="Content" unique_id=1934093557 instance=ExtResource("3_4w5w3")]
+layout_mode = 2
+text = "even LONGER line of text"
+
+[node name="IntroLabel4" parent="Content" unique_id=1227849826 instance=ExtResource("3_4w5w3")]
+layout_mode = 2
+text = "mad text >:("
+
+[node name="IntroLabel5" parent="Content" unique_id=1979287515 instance=ExtResource("3_4w5w3")]
+layout_mode = 2
+text = "among uss"
+
+[node name="IntroLabel6" parent="Content" unique_id=1557153073 instance=ExtResource("3_4w5w3")]
+layout_mode = 2
+text = "HELLO WORLD"
+
+[node name="Button" type="Button" parent="." unique_id=1180072193]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -89.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "main menu"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
