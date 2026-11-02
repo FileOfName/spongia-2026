@@ -20,7 +20,7 @@ Label/colors/font_color = Color(0.9999847, 0.15619686, 0.99999994, 1)
 [node name="MainScene" type="Node2D" unique_id=1857006203]
 
 [node name="Map" parent="." unique_id=239738697 instance=ExtResource("1_gyfs4")]
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1772661912 node_paths=PackedStringArray("target")]
 position = Vector2(1873.9999, 421.99997)
@@ -30,7 +30,7 @@ target = NodePath("../Player")
 SPEED = 7.0
 
 [node name="Player" parent="." unique_id=214714032 instance=ExtResource("3_8mm7a")]
-position = Vector2(1867, 422)
+position = Vector2(2388, 420)
 SPEED = 200.0
 MAX_HEALTH = 200.0
 INVULNERABILITY_SECONDS = 0.2
@@ -39,7 +39,7 @@ INVULNERABILITY_SECONDS = 0.2
 position = Vector2(2042, 464)
 
 [node name="Goblin2" parent="." unique_id=504197657 instance=ExtResource("4_d5x1h")]
-position = Vector2(1996, 537)
+position = Vector2(2119, 577)
 
 [node name="Goblin3" parent="." unique_id=1084020853 instance=ExtResource("4_d5x1h")]
 position = Vector2(1893, 664)
