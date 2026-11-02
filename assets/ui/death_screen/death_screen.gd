@@ -25,6 +25,7 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func show_death_screen():
+	set_buttons_disabled(true)
 	content.modulate = Color(1, 1, 1, 0)
 	background.modulate = Color(1, 1, 1, 0)
 
@@ -32,5 +33,10 @@ func show_death_screen():
 	tween.tween_property(content, "modulate", Color(1, 1, 1, 1), 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(background, "modulate", Color(1, 1, 1, 1), 4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 
-
+	tween.finished.connect(func (): set_buttons_disabled(false))
 	show()
+
+func set_buttons_disabled(value: bool):
+	for child in content.get_children():
+		if child is Button:
+			child.disabled = value
