@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var background: TextureRect = $Background
 @onready var content: VBoxContainer = $Content
-
+#const EnemySpawner = preload("res://map/enemy_spawner.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,7 +12,9 @@ func _on_respawn_pressed() -> void:
 	# TEMPORARY
 	var player = get_parent().get_node("Player")
 	player.inventory.coins = 0
-	player.save_game()
+	#var spawner = EnemySpawner.new()
+	#spawner._setup()
+	#player.save_game()
 	get_tree().change_scene_to_file("res://main_scene.tscn")
 
 

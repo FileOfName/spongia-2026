@@ -48,11 +48,13 @@ func _restore(saved: Array) -> void:
 #prinovej
 #zozber
 func _ready() -> void:
+	_setup()
+func _setup() ->void:
 	for cell in get_used_cells():
 		if get_cell_atlas_coords(cell) in SPAWN_TILES:
 			_cells.append(to_global(map_to_local(cell)))
 	if _cells.is_empty():
-		push_warning("No spawn tiles (atlas 11,0 / 11,1 / 11,3 / 11,5) found - using every tile of this layer")
+		push_warning("Nenajdeee tily")
 		for cell in get_used_cells():
 			_cells.append(to_global(map_to_local(cell)))
 	_spawn_when_map_loaded()
@@ -92,7 +94,7 @@ func _make_enemy(pos: Vector2, scene_path := "") -> Enemy:
 	
 func _spawn_when_map_loaded() -> void:
 	await get_tree().process_frame
-	var scene := get_tree().current_scene
+	var scene = get_tree().current_scene
 	if scene == null or scene.scene_file_path.get_file() != MAP_FILE:
-		print("teraz nie")
+		print("teraz tiezzjavne")
 	_spawn()
