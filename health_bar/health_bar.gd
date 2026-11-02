@@ -7,8 +7,8 @@ var _tween: Tween = null;
 func _ready() -> void:
 	entity.health_changed.connect(update_health_bar)
 
-	value = entity.health
 	max_value = entity.MAX_HEALTH
+	value = entity.health
 
 func update_health_bar(health):
 	if _tween != null:

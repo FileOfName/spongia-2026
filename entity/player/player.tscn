@@ -12,16 +12,16 @@ size = Vector2(85, 78)
 motion_mode = 1
 script = ExtResource("1_e6ar1")
 SPEED = null
+SPRITE = NodePath("Sprite2D")
 MAX_HEALTH = null
 INVULNERABILITY_SECONDS = null
-SPRITE = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=488023533]
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("2_4pl66")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1030996739]
-scale = Vector2(3.63, 3.63)
+scale = Vector2(3.2, 3.2)
 shape = SubResource("RectangleShape2D_0ps6c")
 
 [node name="SwordHitBox" type="Area2D" parent="." unique_id=2065894759]

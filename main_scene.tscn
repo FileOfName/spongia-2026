@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b76jchf8mf70n" path="res://entity/enemy/goblin.tscn" id="4_d5x1h"]
 [ext_resource type="Script" uid="uid://igrv05fr8r0s" path="res://hud.gd" id="5_7ycvg"]
 [ext_resource type="Script" uid="uid://of5y4wiyceil" path="res://debug_info.gd" id="5_8mm7a"]
+[ext_resource type="PackedScene" uid="uid://dtwlbac1hytx8" path="res://entity/enemy/dwarf.tscn" id="5_qwutr"]
 [ext_resource type="PackedScene" uid="uid://bilvmgvc1esl1" path="res://health_bar/health_bar.tscn" id="6_66tet"]
 [ext_resource type="Texture2D" uid="uid://caoikjcqthp3k" path="res://assets/ui/coin.png" id="7_7ycvg"]
 [ext_resource type="FontFile" uid="uid://dkv8cricpcdsu" path="res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf" id="8_wr18j"]
@@ -30,7 +31,7 @@ SPEED = 7.0
 [node name="Player" parent="." unique_id=214714032 instance=ExtResource("3_8mm7a")]
 position = Vector2(1867, 422)
 SPEED = 200.0
-MAX_HEALTH = 100.0
+MAX_HEALTH = 200.0
 INVULNERABILITY_SECONDS = 0.2
 
 [node name="Goblin" parent="." unique_id=176842737 instance=ExtResource("4_d5x1h")]
@@ -53,6 +54,15 @@ position = Vector2(2214, 462)
 
 [node name="Goblin7" parent="." unique_id=1807349433 instance=ExtResource("4_d5x1h")]
 position = Vector2(2312, 1006)
+
+[node name="Dwarf" parent="." unique_id=561001283 instance=ExtResource("5_qwutr")]
+position = Vector2(2623, 593)
+
+[node name="Dwarf2" parent="." unique_id=1376810950 instance=ExtResource("5_qwutr")]
+position = Vector2(2611, 886)
+
+[node name="Dwarf3" parent="." unique_id=2139753795 instance=ExtResource("5_qwutr")]
+position = Vector2(2448, 1475)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1167556653]
 
@@ -99,6 +109,7 @@ theme_override_font_sizes/font_size = 32
 text = "20"
 
 [node name="DeathScreen" parent="." unique_id=417257562 instance=ExtResource("10_wr18j")]
+visible = false
 
 [node name="DebugInfo" type="CanvasLayer" parent="." unique_id=250823104]
 

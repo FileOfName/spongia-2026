@@ -3,17 +3,20 @@ class_name Entity
 extends CharacterBody2D
 
 @export var SPRITE: Sprite2D
-@export var MAX_HEALTH: float = 100
+@export var MAX_HEALTH: float
 @export var INVULNERABILITY_SECONDS: float = 0.2
 
 var _invulnerability: float = 0
 var _heal_tween: Tween = null;
 
-var _health: float = MAX_HEALTH
+@onready var _health: float = MAX_HEALTH
 var health:
 	get:
 		return _health
 	set(value):
+		if _health == 0:
+			return
+
 		_health = clamp(value, 0, MAX_HEALTH)
 		# the entity can technically die multiple times, will fix if its a problem
 		if _health == 0:

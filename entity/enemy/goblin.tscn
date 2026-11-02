@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://b76jchf8mf70n"]
 
 [ext_resource type="Script" uid="uid://cp1pfkr4kcngt" path="res://entity/enemy/goblin.gd" id="1_suqdn"]
-[ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="2_i2agb"]
+[ext_resource type="Texture2D" uid="uid://xe305x3dm3ev" path="res://assets/enemies/goblin.png" id="2_suqdn"]
+[ext_resource type="Texture2D" uid="uid://df88tb85mbcth" path="res://assets/zbrane/mec.png" id="3_i2agb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ps6c"]
 radius = 180.0
@@ -9,21 +10,24 @@ radius = 180.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4x1p8"]
 radius = 210.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_t2471"]
-radius = 30.016663
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_08qc4"]
+radius = 29.0
+height = 74.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3ksy5"]
-radius = 35.014282
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_671wp"]
+radius = 31.0
+height = 78.0
 
 [node name="Goblin" type="CharacterBody2D" unique_id=176842737 node_paths=PackedStringArray("SPRITE")]
 motion_mode = 1
 script = ExtResource("1_suqdn")
 SPEED = 210.0
-WANDER_SPEED = 80.0
+WANDER_SPEED = 90.0
 DAMAGE = 10
 ATTACK_COOLDOWN = 0.5
 WHOOSH_ARC = 90
 SPRITE = NodePath("Sprite2D")
+MAX_HEALTH = 60.0
 
 [node name="EnterArea" type="Area2D" parent="." unique_id=647734369]
 monitorable = false
@@ -38,11 +42,12 @@ monitorable = false
 shape = SubResource("CircleShape2D_4x1p8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=598761116]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_i2agb")
+position = Vector2(2, -12)
+scale = Vector2(2.615, 2.615)
+texture = ExtResource("2_suqdn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=933763264]
-shape = SubResource("CircleShape2D_t2471")
+shape = SubResource("CapsuleShape2D_08qc4")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=481170914]
 path_postprocessing = 1
@@ -56,8 +61,17 @@ debug_path_custom_color = Color(1, 0, 0, 1)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=1653259447]
-shape = SubResource("CircleShape2D_3ksy5")
+shape = SubResource("CapsuleShape2D_671wp")
 debug_color = Color(0.97413296, 0, 0.4324148, 0.41960785)
+
+[node name="WeaponCenter" type="Node2D" parent="." unique_id=191055191]
+position = Vector2(2, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="WeaponCenter" unique_id=904013858]
+position = Vector2(40.999996, -9.999999)
+rotation = 0.61086524
+scale = Vector2(1.196, 1.196)
+texture = ExtResource("3_i2agb")
 
 [connection signal="body_entered" from="EnterArea" to="." method="_on_enter_area_entered"]
 [connection signal="body_exited" from="ExitArea" to="." method="_on_exit_area_exited"]

@@ -22,6 +22,9 @@ var is_chasing = false
 var target: Player = null
 var _wander_delay = 0
 var _attack_cooldown = 0
+var _weapon_rotation = 0
+@onready var weapon_center: Node2D = $WeaponCenter
+@onready var weapon_sprite: Sprite2D = $WeaponCenter/Sprite2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var hit_area: Area2D = $HitArea
 func hod_stuck(kolko: float, okolko: float, kade: Vector2, cas: float) -> void:
@@ -31,7 +34,14 @@ func hod_stuck(kolko: float, okolko: float, kade: Vector2, cas: float) -> void:
 	_stuck_time = cas
 
 func _ready() -> void:
-	$NavigationAgent2D.radius = $CollisionShape2D.shape.radius
+	var shape = $CollisionShape2D.shape
+	var new_radius = 0
+
+	if shape is CircleShape2D:
+		new_radius = shape.radius
+	elif shape is CapsuleShape2D:
+		new_radius = max(shape.radius, shape.height)
+	$NavigationAgent2D.radius = new_radius
 
 func _on_enter_area_entered(body: Node2D) -> void:
 	if body is Player:
@@ -56,6 +66,10 @@ func _process(delta: float) -> void:
 		for b in hit_area.get_overlapping_bodies():
 			if b is Player:
 				_hit(b)
+
+	weapon_center.rotation = wrapf(lerp_angle(weapon_center.rotation, _weapon_rotation, 5 * delta), 0 , 2 * PI)
+
+	weapon_sprite.rotation = 2.6 if weapon_center.rotation > PI/2 && weapon_center.rotation < 3 * PI / 2 else 0.6
 
 func _hit(player: Player):
 	if health == 0 || _attack_cooldown != 0 || _stuck_time > 0.0:
@@ -87,6 +101,7 @@ func _physics_process(delta: float) -> void:
 		return
 	if target != null:
 		nav_agent.target_position = target.global_position
+		_weapon_rotation = (target.position - global_position).angle()
 
 	if nav_agent.is_navigation_finished():
 		if target == null && _wander_delay == 0:
@@ -116,6 +131,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		_on_navigation_agent_2d_velocity_computed(new_velocity)
 
+	SPRITE.flip_h = velocity.x < 0
+	if target == null:
+		_weapon_rotation = PI if velocity.x < 0 else 0.0
 
 	move_and_slide()
 

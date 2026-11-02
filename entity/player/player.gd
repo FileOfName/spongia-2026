@@ -30,6 +30,9 @@ func _ready() -> void:
 	load_game()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if health == 0:
+		return
+
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.physical_keycode == KEY_G:
 			_drop_item()
@@ -49,6 +52,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				_spin_requested = true
 
 func _physics_process(delta: float) -> void:
+	if health == 0:
+		return
+
 	attack_cooldown = maxf(attack_cooldown - delta, 0.0)
 	spin_cooldown = maxf(spin_cooldown - delta, 0.0)
 	_cakanka = maxf(_cakanka - delta, 0.0)
