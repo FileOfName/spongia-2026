@@ -13,7 +13,7 @@ func _ready() -> void:
 	tween.tween_property(goblin, "rotation_degrees", -30, 5).from(30).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
 func _on_new_game_pressed() -> void:
-	get_tree().change_scene_to_file("res://main_scene.tscn")
+	get_tree().change_scene_to_file("res://assets/ui/intro/intro.tscn")
 
 func _on_load_game_pressed() -> void:
 	print("MIskooooo")

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bck33nqeo4nu8"]
+
+[node name="IntroLabel" type="Label" unique_id=2080240990]
+custom_minimum_size = Vector2(0, 64)
+theme_override_font_sizes/font_size = 32
+text = "Line of text"
+horizontal_alignment = 1
