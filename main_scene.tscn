@@ -13,14 +13,51 @@
 [ext_resource type="PackedScene" uid="uid://dtjwyryaa8jdt" path="res://assets/ui/death_screen/death_screen.tscn" id="10_wr18j"]
 [ext_resource type="PackedScene" uid="uid://c40srmgy34i4" path="res://entity/enemy/elf.tscn" id="12_671wp"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
+size = Vector2(8, 1648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_671wp"]
+size = Vector2(8, 2352)
+
 [sub_resource type="Theme" id="Theme_t2471"]
 default_font_size = 32
 Label/colors/font_color = Color(0.9999847, 0.15619686, 0.99999994, 1)
 
 [node name="MainScene" type="Node2D" unique_id=1857006203]
 
-[node name="Map" parent="." unique_id=239738697 instance=ExtResource("1_gyfs4")]
+[node name="Map" type="Node2D" parent="." unique_id=162154985]
 scale = Vector2(4, 4)
+
+[node name="TileMap" parent="Map" unique_id=239738697 instance=ExtResource("1_gyfs4")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Map" unique_id=1549883031]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D" unique_id=324004247]
+position = Vector2(-6, 822)
+shape = SubResource("RectangleShape2D_0ps6c")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Map" unique_id=1044416173]
+position = Vector2(2360.5, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D2" unique_id=720754685]
+position = Vector2(-6.5, 822)
+shape = SubResource("RectangleShape2D_0ps6c")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Map" unique_id=411774691]
+position = Vector2(0, -12)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D3" unique_id=1922187950]
+position = Vector2(-6.0000005, 1174)
+shape = SubResource("RectangleShape2D_671wp")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Map" unique_id=886064416]
+position = Vector2(0, -12)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D4" unique_id=1609399008]
+position = Vector2(-1662, 1173.9999)
+shape = SubResource("RectangleShape2D_671wp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1772661912 node_paths=PackedStringArray("target")]
 position = Vector2(1873.9999, 421.99997)
@@ -28,9 +65,11 @@ scale = Vector2(0.2, 0.2)
 script = ExtResource("2_d5x1h")
 target = NodePath("../Player")
 SPEED = 7.0
+MIN_TOP_LEFT = Vector2(-8, -8)
+MAX_BOTTOM_RIGHT = Vector2(9400, 6584)
 
 [node name="Player" parent="." unique_id=214714032 instance=ExtResource("3_8mm7a")]
-position = Vector2(2388, 420)
+position = Vector2(2831, 1282)
 SPEED = 200.0
 MAX_HEALTH = 200.0
 INVULNERABILITY_SECONDS = 0.2
@@ -51,7 +90,7 @@ position = Vector2(2128, 721)
 position = Vector2(2093, 941)
 
 [node name="Goblin6" parent="." unique_id=1369044777 instance=ExtResource("4_d5x1h")]
-position = Vector2(2214, 462)
+position = Vector2(2438, 281)
 
 [node name="Goblin7" parent="." unique_id=1807349433 instance=ExtResource("4_d5x1h")]
 position = Vector2(2312, 1006)
@@ -151,6 +190,9 @@ text = "KILL PLAYER"
 
 [node name="Elf" parent="." unique_id=1782117420 instance=ExtResource("12_671wp")]
 position = Vector2(1388, 559)
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1496559709]
+position = Vector2(9400, 6584)
 
 [connection signal="on_death" from="Player" to="DeathScreen" method="show_death_screen"]
 [connection signal="pressed" from="DebugInfo/Control/CoinBtn" to="DebugInfo/Control" method="_on_coin_button_pressed"]

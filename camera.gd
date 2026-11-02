@@ -2,6 +2,9 @@ extends Camera2D
 
 @export var target: Node2D
 @export var SPEED = 5.0
+@export var POSITION_CLAMP = false
+@export var MIN_TOP_LEFT: Vector2
+@export var MAX_BOTTOM_RIGHT: Vector2
 
 func _ready() -> void:
 	position = target.position
@@ -9,7 +12,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position = lerp(position, target.position, SPEED * delta)
+	position = lerp(position, _clamp_position(target.position), SPEED * delta)
+
+func _clamp_position(position: Vector2) -> Vector2:
+	var global_viewport_center = get_viewport_rect().size / zoom / 2
+
+	# var center = get_screen_center_position()
+	var min_top_left = MIN_TOP_LEFT + global_viewport_center
+	var max_bottom_right = MAX_BOTTOM_RIGHT - global_viewport_center
+
+	return Vector2(clamp(position.x, min_top_left.x, max_bottom_right.x), clamp(position.y, min_top_left.y, max_bottom_right.y))
 
 #na prsten
 const kolko = 5
@@ -40,7 +52,7 @@ func _make_icons() -> void:
 
 	var layer := CanvasLayer.new()
 	add_child(layer)
-	
+
 	var tex_size = textura.get_size()
 	var fit = minf(velkost.x / tex_size.x, velkost.y / tex_size.y)
 
