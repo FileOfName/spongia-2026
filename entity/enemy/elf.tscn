@@ -23,10 +23,10 @@ script = ExtResource("1_d55ai")
 SPEED = 170.0
 WANDER_SPEED = 50.0
 DAMAGE = 50
-ATTACK_COOLDOWN = 3.0
+ATTACK_COOLDOWN = 1.5
 WHOOSH_ARC = 60
-MAX_COINS = 20
-MIN_COINS = 5
+MAX_COINS = 25
+MIN_COINS = 7
 HAS_BOW = true
 SPRITE = NodePath("Sprite2D")
 MAX_HEALTH = 100.0
@@ -62,8 +62,7 @@ debug_path_custom_color = Color(1, 0, 0, 1)
 position = Vector2(1, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="WeaponCenter" unique_id=1433627457]
-position = Vector2(46, -4.0000014)
-rotation = 0.61086524
+position = Vector2(30, -9)
 scale = Vector2(2.206, 2.206)
 texture = ExtResource("3_w56j2")
 

@@ -85,7 +85,8 @@ func _process(delta: float) -> void:
 
 	weapon_center.rotation = wrapf(lerp_angle(weapon_center.rotation, _weapon_rotation, 5 * delta), 0 , 2 * PI)
 
-	weapon_sprite.rotation = 2.6 if weapon_center.rotation > PI/2 && weapon_center.rotation < 3 * PI / 2 else 0.6
+	if !HAS_BOW:
+		weapon_sprite.rotation = 2.6 if weapon_center.rotation > PI/2 && weapon_center.rotation < 3 * PI / 2 else 0.6
 
 func _hit(player: Player):
 	if health == 0 || _attack_cooldown != 0 || _stuck_time > 0.0:
