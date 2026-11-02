@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dtwlbac1hytx8"]
 
-[ext_resource type="Script" path="res://entity/enemy/goblin.gd" id="1_di5o6"]
+[ext_resource type="Script" uid="uid://cp1pfkr4kcngt" path="res://entity/enemy/goblin.gd" id="1_di5o6"]
 [ext_resource type="Texture2D" uid="uid://c87egokqdm66h" path="res://assets/enemies/dwarf.png" id="2_di5o6"]
 [ext_resource type="Texture2D" uid="uid://clnk4qayac031" path="res://assets/zbrane/sekera.png" id="3_3hoeh"]
 
@@ -15,8 +15,8 @@ radius = 35.0
 height = 80.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_suqdn"]
-radius = 37.0
-height = 84.0
+radius = 39.0
+height = 88.0
 
 [node name="Dwarf" type="CharacterBody2D" unique_id=176842737 node_paths=PackedStringArray("SPRITE")]
 motion_mode = 1

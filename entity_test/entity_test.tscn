@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bkyuqf6lqnspc"]
 
 [ext_resource type="Script" uid="uid://s2krjc04wens" path="res://entity_test/entity_test_script.gd" id="1_yulwx"]
+[ext_resource type="PackedScene" uid="uid://cgy5l4tp3a6ki" path="res://map/map.tscn" id="2_6buwl"]
 [ext_resource type="PackedScene" uid="uid://gnmc6doeugtd" path="res://entity/player/player.tscn" id="2_yulwx"]
 [ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="3_coama"]
 [ext_resource type="Script" uid="uid://bjmmr4lboofsi" path="res://entity/entity.gd" id="3_d6i6a"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bilvmgvc1esl1" path="res://health_bar/health_bar.tscn" id="6_d6i6a"]
 [ext_resource type="PackedScene" uid="uid://dtwlbac1hytx8" path="res://entity/enemy/dwarf.tscn" id="8_2okc1"]
 [ext_resource type="PackedScene" uid="uid://b76jchf8mf70n" path="res://entity/enemy/goblin.tscn" id="8_rck23"]
+[ext_resource type="PackedScene" uid="uid://c40srmgy34i4" path="res://entity/enemy/elf.tscn" id="9_2okc1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mm2fu"]
 radius = 74.50168
@@ -15,10 +17,12 @@ radius = 74.50168
 [node name="EntityTest" type="Node2D" unique_id=50392317]
 script = ExtResource("1_yulwx")
 
+[node name="Node2D" parent="." unique_id=239738697 instance=ExtResource("2_6buwl")]
+
 [node name="Player" parent="." unique_id=214714032 instance=ExtResource("2_yulwx")]
-position = Vector2(392, 387)
+position = Vector2(1322, 531)
 SPEED = 200.0
-MAX_HEALTH = 200.0
+MAX_HEALTH = 2000.0
 
 [node name="Label2" type="Label" parent="." unique_id=146397039]
 offset_left = 18.0
@@ -80,9 +84,13 @@ entity = NodePath("../../Player")
 entity = NodePath("../CharacterBody2D")
 
 [node name="Goblin" parent="." unique_id=176842737 instance=ExtResource("8_rck23")]
+position = Vector2(92, 109)
 
 [node name="Dwarf" parent="." unique_id=2007164693 instance=ExtResource("8_2okc1")]
 position = Vector2(404, -60)
+
+[node name="Elf" parent="." unique_id=158547404 instance=ExtResource("9_2okc1")]
+position = Vector2(1232, 430)
 
 [connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c40srmgy34i4"]
+
+[ext_resource type="Script" uid="uid://cp1pfkr4kcngt" path="res://entity/enemy/goblin.gd" id="1_d55ai"]
+[ext_resource type="Texture2D" uid="uid://cnjfjcihx2mgw" path="res://assets/enemies/elf.png" id="2_d55ai"]
+[ext_resource type="Texture2D" uid="uid://dygvpsmkqaqbv" path="res://assets/zbrane/luk.png" id="3_w56j2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ps6c"]
+radius = 360.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4x1p8"]
+radius = 430.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_08qc4"]
+radius = 19.0
+height = 72.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3hoeh"]
+radius = 210.0
+
+[node name="Elf" type="CharacterBody2D" unique_id=176842737 node_paths=PackedStringArray("SPRITE")]
+motion_mode = 1
+script = ExtResource("1_d55ai")
+SPEED = 170.0
+WANDER_SPEED = 50.0
+DAMAGE = 50
+ATTACK_COOLDOWN = 3.0
+WHOOSH_ARC = 60
+MAX_COINS = 20
+MIN_COINS = 5
+HAS_BOW = true
+SPRITE = NodePath("Sprite2D")
+MAX_HEALTH = 100.0
+
+[node name="EnterArea" type="Area2D" parent="." unique_id=647734369]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterArea" unique_id=1234998955]
+shape = SubResource("CircleShape2D_0ps6c")
+
+[node name="ExitArea" type="Area2D" parent="." unique_id=1460374740]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" unique_id=1707900034]
+shape = SubResource("CircleShape2D_4x1p8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=598761116]
+scale = Vector2(2.15, 2.15)
+texture = ExtResource("2_d55ai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=933763264]
+shape = SubResource("CapsuleShape2D_08qc4")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=481170914]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 90.0
+max_speed = 300.0
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="WeaponCenter" type="Node2D" parent="." unique_id=1842193626]
+position = Vector2(1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="WeaponCenter" unique_id=1433627457]
+position = Vector2(46, -4.0000014)
+rotation = 0.61086524
+scale = Vector2(2.206, 2.206)
+texture = ExtResource("3_w56j2")
+
+[node name="HitArea" type="Area2D" parent="." unique_id=1838127129]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" unique_id=226003571]
+shape = SubResource("CircleShape2D_3hoeh")
+debug_color = Color(0.97413296, 0, 0.4324148, 0.41960785)
+
+[connection signal="body_entered" from="EnterArea" to="." method="_on_enter_area_entered"]
+[connection signal="body_exited" from="ExitArea" to="." method="_on_exit_area_exited"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_entered"]
+[connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_exited"]

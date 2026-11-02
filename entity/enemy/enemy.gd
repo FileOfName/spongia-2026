@@ -12,6 +12,7 @@ extends Entity
 @export var WHOOSH_COLOR = Color(1, 1, 1)
 @export var MAX_COINS = 10
 @export var MIN_COINS = 2
+@export var HAS_BOW = false
 
 var odskoc := 0.0
 var odskocodpocet := 0.0
@@ -23,6 +24,7 @@ var target: Player = null
 var _wander_delay = 0
 var _attack_cooldown = 0
 var _weapon_rotation = 0
+var _keep_distance = false
 @onready var weapon_center: Node2D = $WeaponCenter
 @onready var weapon_sprite: Sprite2D = $WeaponCenter/Sprite2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
@@ -51,11 +53,22 @@ func _on_exit_area_exited(body: Node2D) -> void:
 	if body is Player:
 		target = null
 		nav_agent.target_position = global_position
+		_keep_distance = false
 
 func _on_hit_area_entered(body: Node2D) -> void:
-	# ano, asi by som mal pouzit to co pouziva player, ale s tym sa mi nechce hrat, bite me
 	if body is Player:
+		if HAS_BOW:
+			nav_agent.target_position = global_position
+			_keep_distance = true
+			_shoot(body.global_position)
+			return
 		_hit(body)
+
+func _on_hit_area_exited(body: Node2D) -> void:
+	if body is Player && HAS_BOW:
+		nav_agent.target_position = body.global_position
+		_keep_distance = false
+		return
 
 func _process(delta: float) -> void:
 	super._process(delta)
@@ -63,9 +76,12 @@ func _process(delta: float) -> void:
 	_attack_cooldown -= delta
 	if _attack_cooldown < 0:
 		_attack_cooldown = 0
-		for b in hit_area.get_overlapping_bodies():
-			if b is Player:
-				_hit(b)
+		if HAS_BOW && target != null:
+			_shoot(target.global_position)
+		else:
+			for b in hit_area.get_overlapping_bodies():
+				if b is Player:
+					_hit(b)
 
 	weapon_center.rotation = wrapf(lerp_angle(weapon_center.rotation, _weapon_rotation, 5 * delta), 0 , 2 * PI)
 
@@ -81,6 +97,15 @@ func _hit(player: Player):
 	var whoosh := Whoosh.make(Whoosh.Kind.ARC, get_angle_to(player.global_position), $HitArea/CollisionShape2D.shape.radius, WHOOSH_COLOR)
 	whoosh.sweep = deg_to_rad(WHOOSH_ARC)
 	_show_whoosh(whoosh)
+
+func _shoot(target) -> void:
+	if health == 0 || _attack_cooldown != 0 || _stuck_time > 0.0:
+		return
+	_attack_cooldown = ATTACK_COOLDOWN
+	var arrow = Arrow.new()
+	arrow.setup(self, global_position, target, DAMAGE)
+	arrow.color = WHOOSH_COLOR
+	get_parent().add_child(arrow)
 
 func damage(amount: int):
 	super.damage(amount)
@@ -100,7 +125,14 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	if target != null:
-		nav_agent.target_position = target.global_position
+		if HAS_BOW:
+			if _keep_distance:
+				nav_agent.target_position = global_position
+			else:
+				print("updated?")
+				nav_agent.target_position = target.global_position
+		else:
+			nav_agent.target_position = target.global_position
 		_weapon_rotation = (target.position - global_position).angle()
 
 	if nav_agent.is_navigation_finished():

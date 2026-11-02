@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://caoikjcqthp3k" path="res://assets/ui/coin.png" id="7_7ycvg"]
 [ext_resource type="FontFile" uid="uid://dkv8cricpcdsu" path="res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf" id="8_wr18j"]
 [ext_resource type="PackedScene" uid="uid://dtjwyryaa8jdt" path="res://assets/ui/death_screen/death_screen.tscn" id="10_wr18j"]
+[ext_resource type="PackedScene" uid="uid://c40srmgy34i4" path="res://entity/enemy/elf.tscn" id="12_671wp"]
 
 [sub_resource type="Theme" id="Theme_t2471"]
 default_font_size = 32
@@ -147,6 +148,9 @@ offset_top = 90.0
 offset_right = 279.0
 offset_bottom = 167.0
 text = "KILL PLAYER"
+
+[node name="Elf" parent="." unique_id=1782117420 instance=ExtResource("12_671wp")]
+position = Vector2(1388, 559)
 
 [connection signal="on_death" from="Player" to="DeathScreen" method="show_death_screen"]
 [connection signal="pressed" from="DebugInfo/Control/CoinBtn" to="DebugInfo/Control" method="_on_coin_button_pressed"]
