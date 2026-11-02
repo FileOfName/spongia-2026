@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dmb5tm8t6aplh"]
 
 [ext_resource type="Script" uid="uid://dei76s4xewios" path="res://assets/slot_machine/slot_machine.gd" id="1_5pe8q"]
-[ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="2_bsd7q"]
+[ext_resource type="Texture2D" uid="uid://d4fy8iwohkqts" path="res://assets/slotmachine.png" id="2_5pe8q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
 
@@ -12,8 +12,9 @@ radius = 55.108982
 script = ExtResource("1_5pe8q")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=636324801]
-scale = Vector2(0.455, 0.455)
-texture = ExtResource("2_bsd7q")
+position = Vector2(-4.7683716e-07, 0)
+scale = Vector2(0.6567188, 0.6528125)
+texture = ExtResource("2_5pe8q")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1088703452]
 
