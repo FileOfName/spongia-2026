@@ -252,11 +252,13 @@ func save_game() -> void:
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		if enemy.health > 0:
 			enemies.append(enemy.to_dict())
+	var cam = get_viewport().get_camera_2d() as GameCamera
 	file.store_string(var_to_str({
 		"position": global_position,                 # remove if you rebuild the level on load
 		"inventory": inventory.to_dict(),
 		"enemies": enemies,
-		"camps": campfires
+		"camps": campfires,
+		"rings": 0 if cam == null else cam.kolko_farebne
 		# add your Entity stats here, e.g. "health": health,
 	}))
 
@@ -290,7 +292,9 @@ func load_game() -> void:
 		if pos != Vector2.ZERO:
 			global_position = pos
 
-
+	var cam = get_viewport().get_camera_2d() as GameCamera
+	if cam != null:
+		cam.kolko_farebne = data.get("rings", 0)
 
 	inventory.from_dict(data.get("inventory", {}))
 	# restore your Entity stats here, e.g. health = data.get("health", health)
