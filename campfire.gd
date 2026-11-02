@@ -10,7 +10,7 @@ func _process(delta: float) -> void:
 	_delay = max(_delay - delta, 0)
 
 	if _delay == 0 && player != null:
-		_delay = randi_range(1, 5)
+		_delay = randf_range(1, 3)
 		player.heal(randi_range(10, 40))
 
 

@@ -55,7 +55,6 @@ path_postprocessing = 1
 avoidance_enabled = true
 radius = 90.0
 max_speed = 300.0
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="WeaponCenter" type="Node2D" parent="." unique_id=1842193626]
