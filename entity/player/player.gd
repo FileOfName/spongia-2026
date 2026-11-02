@@ -254,6 +254,7 @@ func save_game() -> void:
 		"position": global_position,                 # remove if you rebuild the level on load
 		"inventory": inventory.to_dict(),
 		"enemies": enemies,
+		"camps": campfires
 		# add your Entity stats here, e.g. "health": health,
 	}))
 
@@ -270,6 +271,25 @@ func load_game() -> void:
 		inventory.additem("palcat")
 		return
 	global_position = data.get("position", global_position)
+	campfires = data.get("camps", [])
+
+	var real_campfires = get_parent().get_node("real_campfires")
+	if real_campfires:
+		var dist = INF
+		var pos = Vector2.ZERO
+		for camp in real_campfires:
+			if real_campfires.get_path() not in campfires:
+				return
+
+			var new_dis = global_position.distance_to(camp.global_position)
+			if dist > new_dis:
+				dist= new_dis
+				pos = camp.get_node("Spawn").global_position
+		if pos != Vector2.ZERO:
+			global_position = pos
+
+
+
 	inventory.from_dict(data.get("inventory", {}))
 	# restore your Entity stats here, e.g. health = data.get("health", health)
 
