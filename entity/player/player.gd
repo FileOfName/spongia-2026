@@ -107,7 +107,8 @@ func _physics_process(delta: float) -> void:
 			elif Input.is_action_just_pressed("attack"):
 				_use()
 		_spin_requested = false
-
+	else:
+		$SwordHitBox/Sprite2D.texture = null
 	var direction := Vector2.ZERO
 	if _cakanka <= 0.0:
 		direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
