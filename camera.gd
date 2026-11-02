@@ -1,5 +1,5 @@
 extends Camera2D
-
+class_name GameCamera
 @export var target: Node2D
 @export var SPEED = 5.0
 @export var POSITION_CLAMP = false

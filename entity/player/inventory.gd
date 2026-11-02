@@ -14,9 +14,9 @@ var coins = 0
 var items: Array[Item] = [null, null, null, null]   # one Item (a stack) per slot, null = empty
 var selected := 0                                    # the slot currently in hand
 
-
 ## Fills the whole screen (the bar is drawn at the bottom) and lets mouse clicks pass through.
 func _ready() -> void:
+	
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -32,13 +32,11 @@ func select(index: int) -> void:
 	queue_redraw()
 
 
-## Adds an item by its type with optional changed stats, up to 6 name/value pairs:
-##   additem("axe", "damage", 60, "spin_cooldown", 2.0, "color", Color.RED)
 ## For stacks use "count", e.g. additem("herb", "count", 3). Returns how many did NOT fit.
 func additem(type: String, n1 := "", v1: Variant = null, n2 := "", v2: Variant = null, n3 := "", v3: Variant = null, n4 := "", v4: Variant = null, n5 := "", v5: Variant = null, n6 := "", v6: Variant = null) -> int:
 	var overrides := {}
-	var names := [n1, n2, n3, n4, n5, n6]
-	var values := [v1, v2, v3, v4, v5, v6]
+	var names = [n1, n2, n3, n4, n5, n6]
+	var values = [v1, v2, v3, v4, v5, v6]
 	for i in names.size():
 		if names[i] != "":
 			overrides[names[i]] = values[i]
@@ -50,18 +48,28 @@ func add(item: Item) -> int:
 	if item.type == "coin":
 		coins += item.count
 		return 0
+	if item.type == "prsten":
+		var cam = get_viewport().get_camera_2d() as GameCamera
+		if cam != null:
+			cam.kolko_farebne += item.count
+			if cam.kolko_farebne >=5:
+				get_tree().change_scene_to_file("res://assets/ui/intro/outro.tscn")
+			else:
+				return 0
+		else:
+			print("nieco sa solidne pokazilo")
 
-	var left := item.count
+	var left = item.count
 	for slot in items:
 		if left > 0 and slot != null and slot.same_as(item) and slot.count < slot.max_stack:
-			var moved := mini(left, slot.max_stack - slot.count)
+			var moved = mini(left, slot.max_stack - slot.count)
 			slot.count += moved
 			left -= moved
 	while left > 0:
-		var free := items.find(null)
+		var free = items.find(null)
 		if free == -1:
 			break
-		var moved := mini(left, maxi(item.max_stack, 1))
+		var moved = mini(left, maxi(item.max_stack, 1))
 		items[free] = item.copy(moved)
 		left -= moved
 	queue_redraw()

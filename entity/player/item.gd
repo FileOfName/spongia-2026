@@ -64,6 +64,11 @@ const testy := {
 		"display_name": "Coin",
 		"texture_path": "res://assets/ui/coin.png",
 		"texture_scale": 0.7
+	},
+	"prsten": {
+		"display_name": "Prsten moci",
+		"texture_path": "res://assets/ui/prsten.png",
+		"texture_scale": 0.7
 	}
 }
 

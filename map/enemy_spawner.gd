@@ -73,7 +73,7 @@ func _spawn_new() -> void:
 func _make_group(size: int, base: bool, party: EnemyParty = null) -> void:
 	size = maxi(size, 1)
 	var center: Vector2 = _cells.pick_random()
-	var near := _cells.filter(func(c): return c.distance_to(center) <= group_radius)
+	var near = _cells.filter(func(c): return c.distance_to(center) <= group_radius)
 	var buffed_one := randi_range(0, size - 1)
 	for i in size:
 		var enemy := _make_enemy(near.pick_random() + Vector2(randf_range(-8, 8), randf_range(-8, 8)))
