@@ -9,8 +9,12 @@ func _ready() -> void:
 	hide()
 
 func _on_respawn_pressed() -> void:
-	#MISKO YOUR CODE HERE DANKEE
-	pass # Replace with function body.
+	# TEMPORARY
+	var player = get_parent().get_node("Player")
+	player.inventory.coins = 0
+	player.save_game()
+	get_tree().change_scene_to_file("res://main_scene.tscn")
+
 
 func _on_main_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://assets/ui/main_menu/main_menu.tscn")
@@ -28,6 +32,3 @@ func show_death_screen():
 
 
 	show()
-
-func _on_player_on_death() -> void:
-	pass # Replace with function body.

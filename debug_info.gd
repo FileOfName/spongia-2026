@@ -23,3 +23,6 @@ func _on_coin_button_pressed() -> void:
 	var coin = Item.new("coin")
 	coin.count = 1000
 	player.inventory.add(coin)
+
+func _on_kill_btn_pressed():
+	player.health = 0

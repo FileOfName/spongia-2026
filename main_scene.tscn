@@ -211,4 +211,4 @@ position = Vector2(3106, 134)
 
 [connection signal="on_death" from="Player" to="DeathScreen" method="show_death_screen"]
 [connection signal="pressed" from="DebugInfo/Control/CoinBtn" to="DebugInfo/Control" method="_on_coin_button_pressed"]
-[connection signal="pressed" from="DebugInfo/Control/DeathBtn" to="DebugInfo/Control" method="_on_death_btn_pressed"]
+[connection signal="pressed" from="DebugInfo/Control/DeathBtn" to="DebugInfo/Control" method="_on_kill_btn_pressed"]
