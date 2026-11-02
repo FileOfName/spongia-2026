@@ -4,6 +4,7 @@ extends Entity
 @export var SPEED: float = 280
 
 var inventory := Inventory.new()
+var campfires = []
 var attack_cooldown = 0.0
 var spin_cooldown = 0.0
 

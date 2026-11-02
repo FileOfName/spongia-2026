@@ -23,11 +23,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ps6c"]
+radius = 82.1523
+
 [node name="campfire" type="Node2D" unique_id=2065303216]
 script = ExtResource("1_y2ey3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1236998734]
-position = Vector2(37, 35)
 sprite_frames = SubResource("SpriteFrames_wk7ay")
 animation = &"fire"
 frame_progress = 0.889319
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1508659444]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=974164477]
+shape = SubResource("CircleShape2D_0ps6c")
+
+[node name="Spawn" type="Node2D" parent="." unique_id=202217965]
+position = Vector2(27, 0)
