@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://ike85kn20t0e"]
+
+[ext_resource type="PackedScene" uid="uid://cgy5l4tp3a6ki" path="res://map/map.tscn" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://bjy1qt1lfvxwf" path="res://assets/ui/main_menu/main_menu.gd" id="1_jix8l"]
+[ext_resource type="PackedScene" uid="uid://b76jchf8mf70n" path="res://entity/enemy/goblin.tscn" id="2_7vrkn"]
+[ext_resource type="FontFile" uid="uid://bb6m23ob4gm48" path="res://assets/fonts/Kablemmo/Kablammo-Regular-VariableFont_MORF.ttf" id="3_fu7sn"]
+
+[sub_resource type="Gradient" id="Gradient_7vrkn"]
+colors = PackedColorArray(0, 0, 0, 0.25490198, 0.0627451, 0.0627451, 0.0627451, 0.7647059)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0ps6c"]
+gradient = SubResource("Gradient_7vrkn")
+
+[sub_resource type="Theme" id="Theme_fu7sn"]
+default_font_size = 32
+
+[node name="MainMenu" type="Control" unique_id=507361587]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jix8l")
+
+[node name="Map" parent="." unique_id=239738697 instance=ExtResource("1_06t4h")]
+position = Vector2(-1544, -389)
+scale = Vector2(3, 3)
+
+[node name="Goblin" parent="." unique_id=176842737 instance=ExtResource("2_7vrkn")]
+position = Vector2(881, 491)
+scale = Vector2(8, 8)
+script = null
+
+[node name="EnterArea" parent="Goblin" index="0" unique_id=647734369]
+visible = false
+
+[node name="ExitArea" parent="Goblin" index="1" unique_id=1460374740]
+visible = false
+
+[node name="Sprite2D" parent="Goblin" index="2" unique_id=598761116]
+z_index = 1
+position = Vector2(5.1259995e-06, -31.704256)
+flip_h = true
+
+[node name="CollisionShape2D" parent="Goblin" index="3" unique_id=933763264]
+visible = false
+
+[node name="HitArea" parent="Goblin" index="5" unique_id=1405983472]
+visible = false
+
+[node name="Sprite2D" parent="Goblin/WeaponCenter" parent_id_path=PackedInt32Array(176842737, 191055191) index="0" unique_id=904013858]
+position = Vector2(-27.187962, -33.451138)
+rotation = -0.12503645
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1906041220]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_0ps6c")
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=884260405]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 85.0
+offset_top = -202.0
+offset_right = 571.0
+offset_bottom = 202.0
+grow_vertical = 2
+theme = SubResource("Theme_fu7sn")
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Content" unique_id=121556409]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 96
+text = "The Gobbit"
+
+[node name="NewGame" type="Button" parent="Content" unique_id=1807454089]
+layout_mode = 2
+text = "new game"
+
+[node name="LoadGame" type="Button" parent="Content" unique_id=1256948088]
+layout_mode = 2
+text = "load game"
+
+[node name="Credits" type="Button" parent="Content" unique_id=551269537]
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Content" unique_id=1384388607]
+layout_mode = 2
+text = "QUIT"
+
+[node name="Credits" type="VBoxContainer" parent="." unique_id=277231883]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 85.0
+offset_top = -202.0
+offset_right = 571.0
+offset_bottom = 202.0
+grow_vertical = 2
+theme = SubResource("Theme_fu7sn")
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Credits" unique_id=1341307351]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 96
+text = "The Gobbit"
+
+[node name="Label2" type="Label" parent="Credits" unique_id=1074926375]
+layout_mode = 2
+text = "--=RAJCINKY STUDIOS=--
+MICHAL ADAM
+RADKO BÁBÍČEK
+VIOLA LEPEJOVÁ
+ADAM DANKO
+ĽUBOŠ ŠESTÁK
+NAZAR KRYVOSHEI"
+
+[node name="Back" type="Button" parent="Credits" unique_id=1366350447]
+custom_maximum_size = Vector2(192, -1)
+layout_mode = 2
+text = "back"
+
+[connection signal="pressed" from="Content/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Content/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="Content/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Content/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Credits/Back" to="." method="_on_back_pressed"]
+
+[editable path="Goblin"]

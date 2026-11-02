@@ -13,7 +13,7 @@ func _on_respawn_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_main_menu_pressed() -> void:
-	print("not made")
+	get_tree().change_scene_to_file("res://assets/ui/main_menu/main_menu.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
