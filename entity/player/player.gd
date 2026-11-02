@@ -264,22 +264,23 @@ func load_game() -> void:
 	var data: Variant = read_save()
 	if data == null:
 		inventory.additem("mec")
-		inventory.additem("sek")
+		# inventory.additem("sek")
 		inventory.additem("luk")
 		#inventory.additem("dyka")
 		#inventory.additem("kriak")
-		inventory.additem("palcat")
+		# inventory.additem("palcat")
 		return
 	global_position = data.get("position", global_position)
 	campfires = data.get("camps", [])
 
-	var real_campfires = get_parent().get_node("real_campfires")
+	var real_campfires = get_parent().get_node("Map").get_node("campfires")
 	if real_campfires:
 		var dist = INF
 		var pos = Vector2.ZERO
-		for camp in real_campfires:
-			if real_campfires.get_path() not in campfires:
-				return
+		for camp in real_campfires.get_children():
+			print(camp.get_path(), campfires)
+			if camp.get_path() not in campfires:
+				continue
 
 			var new_dis = global_position.distance_to(camp.global_position)
 			if dist > new_dis:
