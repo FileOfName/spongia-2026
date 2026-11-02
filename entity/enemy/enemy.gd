@@ -146,10 +146,15 @@ func damage(amount: int):
 func _death_anim_finished():
 	super._death_anim_finished()
 	if buffed:
-		Pickup.drop(get_parent(), global_position, Item.new("prsten"), 0, Vector2.from_angle(randf() * 2 * PI) * 50)
+		var p = Pickup.drop(get_parent().get_parent().get_parent(), global_position, Item.new("prsten"), 0, Vector2.from_angle(randf() * 2 * PI) * 50)
+		p.scale = Vector2(4, 4)
+
 	else:
 		for i in range(randi_range(MIN_COINS, MAX_COINS)):
-			Pickup.drop(get_parent(), global_position, Item.new("coin"), 0, Vector2.from_angle(randf() * 2 * PI) * 50)
+			var p = Pickup.drop(get_parent().get_parent().get_parent(), global_position, Item.new("coin"), 0, Vector2.from_angle(randf() * 2 * PI) * 50)
+			p.scale = Vector2(4, 4)
+
+
 
 func _physics_process(delta: float) -> void:
 	if health == 0:

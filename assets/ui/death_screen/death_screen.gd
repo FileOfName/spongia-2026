@@ -14,7 +14,7 @@ func _on_respawn_pressed() -> void:
 	player.inventory.coins = 0
 	#var spawner = EnemySpawner.new()
 	#spawner._setup()
-	#player.save_game()
+	player.save_game()
 	get_tree().change_scene_to_file("res://main_scene.tscn")
 
 

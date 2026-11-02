@@ -280,7 +280,6 @@ func load_game() -> void:
 		var dist = INF
 		var pos = Vector2.ZERO
 		for camp in real_campfires.get_children():
-			print(camp.get_path(), campfires)
 			if camp.get_path() not in campfires:
 				continue
 

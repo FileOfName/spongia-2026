@@ -8,7 +8,7 @@ extends CanvasLayer
 @onready var content: VBoxContainer = $Content
 @onready var button: Button = $Button
 
-var _skip_time := 0.0
+@onready var _skip_time := -SKIP_TIME * 4
 var _skip_count := 0
 var _tween: Tween;
 
@@ -43,6 +43,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	_skip_count += 1
 
 func _process(delta: float) -> void:
+	if _skip_time < 0:
+		_skip_time += delta
+		if _skip_time > 0:
+			_skip_time = 0
+		return
+
 	if _skip_count > 0:
 		_skip_time += delta
 		if _skip_time > SKIP_TIME:
