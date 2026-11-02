@@ -14,6 +14,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position = lerp(position, _clamp_position(target.position), SPEED * delta)
 
+	if Input.is_action_just_pressed("fullscreen"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
 func _clamp_position(position: Vector2) -> Vector2:
 	var global_viewport_center = get_viewport_rect().size / zoom / 2
 
