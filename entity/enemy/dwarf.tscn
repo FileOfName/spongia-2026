@@ -30,7 +30,7 @@ WHOOSH_ARC = 60
 MAX_COINS = 20
 MIN_COINS = 5
 SPRITE = NodePath("Sprite2D")
-MAX_HEALTH = 100.0
+MAX_HEALTH = 140.0
 
 [node name="EnterArea" type="Area2D" parent="." unique_id=647734369]
 monitorable = false
