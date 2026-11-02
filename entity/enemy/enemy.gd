@@ -137,6 +137,7 @@ func _shoot(target) -> void:
 	var arrow = Arrow.new()
 	arrow.setup(self, global_position, target, DAMAGE)
 	arrow.color = WHOOSH_COLOR
+	arrow.scale = Vector2(0.2,0.2)
 	get_parent().add_child(arrow)
 
 func damage(amount: int):

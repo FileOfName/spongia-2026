@@ -4,15 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://dfnvlrlgkmasx" path="res://campfire.tscn" id="2_42l1d"]
 [ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="2_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://gnmc6doeugtd" path="res://entity/player/player.tscn" id="3_8mm7a"]
-[ext_resource type="PackedScene" uid="uid://b76jchf8mf70n" path="res://entity/enemy/goblin.tscn" id="4_d5x1h"]
 [ext_resource type="Script" uid="uid://igrv05fr8r0s" path="res://hud.gd" id="5_7ycvg"]
 [ext_resource type="Script" uid="uid://of5y4wiyceil" path="res://debug_info.gd" id="5_8mm7a"]
-[ext_resource type="PackedScene" uid="uid://dtwlbac1hytx8" path="res://entity/enemy/dwarf.tscn" id="5_qwutr"]
 [ext_resource type="PackedScene" uid="uid://bilvmgvc1esl1" path="res://health_bar/health_bar.tscn" id="6_66tet"]
 [ext_resource type="Texture2D" uid="uid://caoikjcqthp3k" path="res://assets/ui/coin.png" id="7_7ycvg"]
 [ext_resource type="FontFile" uid="uid://dkv8cricpcdsu" path="res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf" id="8_wr18j"]
 [ext_resource type="PackedScene" uid="uid://dtjwyryaa8jdt" path="res://assets/ui/death_screen/death_screen.tscn" id="10_wr18j"]
-[ext_resource type="PackedScene" uid="uid://c40srmgy34i4" path="res://entity/enemy/elf.tscn" id="12_671wp"]
 [ext_resource type="PackedScene" uid="uid://dmb5tm8t6aplh" path="res://assets/slot_machine/slot_machine.tscn" id="13_mo76n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
@@ -113,36 +110,6 @@ SPEED = 200.0
 MAX_HEALTH = 200.0
 INVULNERABILITY_SECONDS = 0.2
 
-[node name="Goblin" parent="." unique_id=176842737 instance=ExtResource("4_d5x1h")]
-position = Vector2(2042, 464)
-
-[node name="Goblin2" parent="." unique_id=504197657 instance=ExtResource("4_d5x1h")]
-position = Vector2(2119, 577)
-
-[node name="Goblin3" parent="." unique_id=1084020853 instance=ExtResource("4_d5x1h")]
-position = Vector2(1893, 664)
-
-[node name="Goblin4" parent="." unique_id=482097049 instance=ExtResource("4_d5x1h")]
-position = Vector2(2128, 721)
-
-[node name="Goblin5" parent="." unique_id=855453711 instance=ExtResource("4_d5x1h")]
-position = Vector2(2093, 941)
-
-[node name="Goblin6" parent="." unique_id=1369044777 instance=ExtResource("4_d5x1h")]
-position = Vector2(2438, 281)
-
-[node name="Goblin7" parent="." unique_id=1807349433 instance=ExtResource("4_d5x1h")]
-position = Vector2(2312, 1006)
-
-[node name="Dwarf" parent="." unique_id=561001283 instance=ExtResource("5_qwutr")]
-position = Vector2(2623, 593)
-
-[node name="Dwarf2" parent="." unique_id=1376810950 instance=ExtResource("5_qwutr")]
-position = Vector2(2611, 886)
-
-[node name="Dwarf3" parent="." unique_id=2139753795 instance=ExtResource("5_qwutr")]
-position = Vector2(2448, 1475)
-
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1167556653]
 
 [node name="Control" type="Control" parent="HUD" unique_id=272116386 node_paths=PackedStringArray("player")]
@@ -240,9 +207,6 @@ offset_top = 90.0
 offset_right = 279.0
 offset_bottom = 167.0
 text = "KILL PLAYER"
-
-[node name="Elf" parent="." unique_id=1782117420 instance=ExtResource("12_671wp")]
-position = Vector2(1388, 559)
 
 [node name="SlotMachine7" parent="." unique_id=1748506954 instance=ExtResource("13_mo76n")]
 position = Vector2(5671, 5948)

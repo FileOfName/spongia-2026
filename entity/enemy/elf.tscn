@@ -18,6 +18,7 @@ height = 72.0
 radius = 210.0
 
 [node name="Elf" type="CharacterBody2D" unique_id=176842737 node_paths=PackedStringArray("SPRITE")]
+scale = Vector2(0.25, 0.25)
 motion_mode = 1
 script = ExtResource("1_d55ai")
 SPEED = 170.0
