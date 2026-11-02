@@ -225,7 +225,7 @@ func _notification(what: int) -> void:
 
 
 ## Where the save file lives: next to the exe in an exported game, in the project folder in the editor.
-func _save_path() -> String:
+static func _save_path() -> String:
 	var dir := ProjectSettings.globalize_path("res://") if OS.has_feature("editor") else OS.get_executable_path().get_base_dir()
 	return dir.path_join("savegame.txt")
 

@@ -13,6 +13,10 @@ func _ready() -> void:
 	tween.tween_property(goblin, "rotation_degrees", -30, 5).from(30).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
 func _on_new_game_pressed() -> void:
+	var path = Player._save_path()
+
+	if FileAccess.file_exists(path):
+		DirAccess.remove_absolute(path)
 	get_tree().change_scene_to_file("res://assets/ui/intro/intro.tscn")
 
 func _on_load_game_pressed() -> void:
