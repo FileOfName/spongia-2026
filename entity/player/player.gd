@@ -125,6 +125,8 @@ func _physics_process(delta: float) -> void:
 	new_velocity+=odskocpriestor*odskoc*-1
 	odskoc=maxf(odskoc - odskocodpocet*delta, 0.0)
 	velocity = new_velocity
+
+	SPRITE.flip_h = velocity.x < 0
 	move_and_slide()
 
 func _use() -> void:
