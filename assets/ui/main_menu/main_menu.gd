@@ -11,6 +11,8 @@ func _ready() -> void:
 	tween.set_loops()
 	tween.tween_property(goblin, "rotation_degrees", 30, 5).from(-30).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(goblin, "rotation_degrees", -30, 5).from(30).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	if !FileAccess.file_exists(Player._save_path()):
+		$Content/LoadGame.disabled = true
 
 func _on_new_game_pressed() -> void:
 	var path = Player._save_path()
