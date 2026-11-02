@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bilvmgvc1esl1" path="res://health_bar/health_bar.tscn" id="6_66tet"]
 [ext_resource type="Texture2D" uid="uid://caoikjcqthp3k" path="res://assets/ui/coin.png" id="7_7ycvg"]
 [ext_resource type="FontFile" uid="uid://dkv8cricpcdsu" path="res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf" id="8_wr18j"]
+[ext_resource type="PackedScene" uid="uid://dtjwyryaa8jdt" path="res://assets/ui/death_screen/death_screen.tscn" id="10_wr18j"]
 
 [sub_resource type="Theme" id="Theme_t2471"]
 default_font_size = 32
@@ -97,6 +98,8 @@ theme_override_fonts/font = ExtResource("8_wr18j")
 theme_override_font_sizes/font_size = 32
 text = "20"
 
+[node name="DeathScreen" parent="." unique_id=417257562 instance=ExtResource("10_wr18j")]
+
 [node name="DebugInfo" type="CanvasLayer" parent="." unique_id=250823104]
 
 [node name="Control" type="Control" parent="DebugInfo" unique_id=1388267658 node_paths=PackedStringArray("player")]
@@ -126,4 +129,14 @@ offset_right = 427.0
 offset_bottom = 50.0
 text = "Give 1000 coins"
 
+[node name="DeathBtn" type="Button" parent="DebugInfo/Control" unique_id=2112214947]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 90.0
+offset_right = 279.0
+offset_bottom = 167.0
+text = "KILL PLAYER"
+
+[connection signal="on_death" from="Player" to="DeathScreen" method="show_death_screen"]
 [connection signal="pressed" from="DebugInfo/Control/CoinBtn" to="DebugInfo/Control" method="_on_coin_button_pressed"]
+[connection signal="pressed" from="DebugInfo/Control/DeathBtn" to="DebugInfo/Control" method="_on_death_btn_pressed"]

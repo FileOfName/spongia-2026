@@ -256,5 +256,6 @@ func load_game() -> void:
 	# restore your Entity stats here, e.g. health = data.get("health", health)
 
 func _death():
-	#TODO:
-	pass
+	on_death.emit()
+
+signal on_death()

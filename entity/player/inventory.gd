@@ -6,8 +6,8 @@ const SLOTS := 4
 const SLOT_SIZE := 64.0
 const GAP := 8.0
 const MARGIN := 16.0
-var slot_texture: Texture2D = load("res://assets/ui/nine_patch.png")
-var slot_texture_selected: Texture2D = load("res://assets/ui/nine_patch_selected.png")
+var slot_texture: Texture2D = load("res://assets/ui/inv/inv.png")
+var slot_texture_selected: Texture2D = load("res://assets/ui/inv/inv_selected.png")
 var font: Font = load("res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf")
 
 var coins = 0

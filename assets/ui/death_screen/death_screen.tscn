@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://dtjwyryaa8jdt"]
+
+[ext_resource type="Script" uid="uid://c144nwdx7h4ur" path="res://assets/ui/death_screen/death_screen.gd" id="1_08qc4"]
+[ext_resource type="Shader" uid="uid://bfnw6tiisrfqu" path="res://assets/ui/death_screen/death.gdshader" id="1_ex68u"]
+[ext_resource type="Texture2D" uid="uid://blcaqm5eupyte" path="res://assets/ui/death_screen/death.png" id="2_6bi5g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1ui3"]
+shader = ExtResource("1_ex68u")
+shader_parameter/scale = Vector2(0.1, 0.1)
+shader_parameter/scroll = Vector2(0.3, 0.3)
+shader_parameter/alpha = 0.9
+
+[sub_resource type="Theme" id="Theme_0ps6c"]
+default_font_size = 32
+
+[node name="DeathScreen" type="CanvasLayer" unique_id=417257562]
+script = ExtResource("1_08qc4")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1769035471]
+material = SubResource("ShaderMaterial_b1ui3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6bi5g")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=1380323556]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.25
+offset_top = -119.5
+offset_right = 194.25
+offset_bottom = 119.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0ps6c")
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Content" unique_id=83409401]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+text = "YOU DIED
+†"
+horizontal_alignment = 1
+
+[node name="Respawn" type="Button" parent="Content" unique_id=1592448290]
+layout_mode = 2
+text = "Respawn"
+
+[node name="MainMenu" type="Button" parent="Content" unique_id=60288125]
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="Quit" type="Button" parent="Content" unique_id=844672843]
+layout_mode = 2
+text = "QUIT"
+
+[connection signal="pressed" from="Content/Respawn" to="." method="_on_respawn_pressed"]
+[connection signal="pressed" from="Content/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Content/Quit" to="." method="_on_quit_pressed"]

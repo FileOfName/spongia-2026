@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bws0n0vboges4"]
 
-[ext_resource type="Texture2D" uid="uid://yh0bwo8bwkmg" path="res://assets/ui/nine_patch.png" id="1_gvx5b"]
+[ext_resource type="Texture2D" uid="uid://yh0bwo8bwkmg" path="res://assets/inv/inv.png" id="1_gvx5b"]
 
 [node name="Control" type="Control" unique_id=2011627687]
 custom_minimum_size = Vector2(72, 72)

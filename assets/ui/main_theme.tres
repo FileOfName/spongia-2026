@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3 uid="uid://do1u3oqyxhb2h"]
+
+[ext_resource type="StyleBox" uid="uid://cyhl4rrtt7lfi" path="res://assets/ui/nine_patch.tres" id="1_mdnfb"]
+[ext_resource type="StyleBox" uid="uid://coiimwkvi1vk8" path="res://assets/ui/nine_patch_selected.tres" id="2_gx6pb"]
+[ext_resource type="StyleBox" uid="uid://bulapcbu0m787" path="res://assets/ui/nine_patch_pressed.tres" id="3_gx6pb"]
+
+[resource]
+Button/styles/disabled = ExtResource("1_mdnfb")
+Button/styles/focus = ExtResource("2_gx6pb")
+Button/styles/hover = ExtResource("2_gx6pb")
+Button/styles/normal = ExtResource("1_mdnfb")
+Button/styles/pressed = ExtResource("3_gx6pb")
