@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dfnvlrlgkmasx"]
+
+[ext_resource type="Texture2D" uid="uid://2v5q1jq8fjf1" path="res://assets/camp/campfire1.png" id="1_b5him"]
+[ext_resource type="Script" uid="uid://bd4pd5g80ry8s" path="res://campfire.gd" id="1_y2ey3"]
+[ext_resource type="Texture2D" uid="uid://bxnxqii0v3wyf" path="res://assets/camp/campfire2.png" id="2_y2ey3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wk7ay"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b5him")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_y2ey3")
+}],
+"loop": 1,
+"name": &"fire",
+"speed": 5.0
+}]
+
+[node name="campfire" type="Node2D" unique_id=2065303216]
+script = ExtResource("1_y2ey3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1236998734]
+position = Vector2(37, 35)
+sprite_frames = SubResource("SpriteFrames_wk7ay")
+animation = &"fire"
+frame_progress = 0.889319

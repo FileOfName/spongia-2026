@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://gnmc6doeugtd"]
 
 [ext_resource type="Script" uid="uid://bkki0pjc7702w" path="res://entity/player/player.gd" id="1_e6ar1"]
-[ext_resource type="Texture2D" uid="uid://c6neu7naqgs5y" path="res://icon.svg" id="2_4pl66"]
+[ext_resource type="Texture2D" uid="uid://bsk8ptrji42jm" path="res://assets/player.png" id="2_4pl66"]
 [ext_resource type="Texture2D" uid="uid://df88tb85mbcth" path="res://assets/zbrane/mec.png" id="3_4pl66"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e6ar1"]
-radius = 11.981565
-height = 25.806448
+radius = 7.373271
+height = 31.336403
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4x1p8"]
 size = Vector2(85, 78)
@@ -20,14 +20,17 @@ MAX_HEALTH = null
 INVULNERABILITY_SECONDS = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=488023533]
-scale = Vector2(0.43, 0.43)
+position = Vector2(0, 4.7683716e-07)
+scale = Vector2(2.248125, 2.3887498)
 texture = ExtResource("2_4pl66")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1030996739]
+position = Vector2(3, 5)
 scale = Vector2(2.17, 2.17)
 shape = SubResource("CapsuleShape2D_e6ar1")
 
 [node name="SwordHitBox" type="Area2D" parent="." unique_id=2065894759]
+position = Vector2(59, -23)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitBox" unique_id=257707662]
 position = Vector2(79.5, 0)
@@ -35,9 +38,9 @@ shape = SubResource("RectangleShape2D_4x1p8")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="SwordHitBox" unique_id=1222097417]
-position = Vector2(38.999996, -11)
+position = Vector2(-26.000002, 31)
 rotation = 0.61086524
-scale = Vector2(2.031, 2.031)
+scale = Vector2(1.149923, 1.1962461)
 texture = ExtResource("3_4pl66")
 
 [connection signal="body_entered" from="SwordHitBox" to="." method="_on_sword_hit_box_body_entered"]
