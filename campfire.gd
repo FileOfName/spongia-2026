@@ -9,9 +9,9 @@ func _ready():
 func _process(delta: float) -> void:
 	_delay = max(_delay - delta, 0)
 
-	if _delay == 0:
+	if _delay == 0 && player != null:
 		_delay = randi_range(1, 5)
-		player.heal(randi_range(10, 40))
+d		player.heal(randi_range(10, 40))
 
 
 
