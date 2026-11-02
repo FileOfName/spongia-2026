@@ -13,15 +13,14 @@ func _process(delta: float) -> void:
 		var rand = randi_range(1, 5)
 		if rand == 1:
 			for i in range(randi_range(0, 40)):
-				Pickup.drop(get_parent(), global_position, Item.new("coin"), 0, Vector2.from_angle(rotation + randf_range(-0.4, 0.4)) * 100)
-
+				var p = Pickup.drop(get_parent().get_parent(), global_position, Item.new("coin"), 0, Vector2.from_angle(rotation + randf_range(-0.4, 0.4)) * 100)
+				p.scale = Vector2(4, 4)
 		else:
 			var item_name = _items[rand - 2]
 			print(item_name)
 			var default = Item.testy[item_name]
 			var item = Item.new(item_name, {"damage": default["damage"] + randi_range(-5, 40), "cooldown": default["cooldown"] + randf_range(-0.25, 0.1)})
-			Pickup.drop(get_parent(), global_position, item, 0, Vector2.from_angle(rotation + randf_range(-0.4, 0.4)) * 100)
-
+			Pickup.drop(get_parent().get_parent(), global_position, item, 0, Vector2.from_angle(rotation + randf_range(-0.4, 0.4)) * 100)
 
 
 
