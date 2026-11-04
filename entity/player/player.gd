@@ -277,7 +277,7 @@ func load_game() -> void:
 	global_position = data.get("position", global_position)
 	campfires = data.get("camps", [])
 
-	var real_campfires = get_parent().get_node("Map").get_node("campfires")
+	var real_campfires = get_parent().get_node("Map").get_node("Campfires")
 	if real_campfires:
 		var dist = INF
 		var pos = Vector2.ZERO

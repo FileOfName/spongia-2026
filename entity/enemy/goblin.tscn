@@ -19,7 +19,6 @@ radius = 31.0
 height = 78.0
 
 [node name="Goblin" type="CharacterBody2D" unique_id=176842737 node_paths=PackedStringArray("SPRITE")]
-scale = Vector2(0.25, 0.25)
 motion_mode = 1
 script = ExtResource("1_suqdn")
 SPEED = 210.0

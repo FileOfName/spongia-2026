@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://djbj4io0alrba"]
 
 [ext_resource type="PackedScene" uid="uid://cgy5l4tp3a6ki" path="res://map/map.tscn" id="1_gyfs4"]
-[ext_resource type="PackedScene" uid="uid://dfnvlrlgkmasx" path="res://campfire.tscn" id="2_42l1d"]
 [ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="2_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://gnmc6doeugtd" path="res://entity/player/player.tscn" id="3_8mm7a"]
 [ext_resource type="Script" uid="uid://igrv05fr8r0s" path="res://hud.gd" id="5_7ycvg"]
@@ -10,13 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://caoikjcqthp3k" path="res://assets/ui/coin.png" id="7_7ycvg"]
 [ext_resource type="FontFile" uid="uid://dkv8cricpcdsu" path="res://assets/fonts/Silkscreen/Silkscreen-Regular.ttf" id="8_wr18j"]
 [ext_resource type="PackedScene" uid="uid://dtjwyryaa8jdt" path="res://assets/ui/death_screen/death_screen.tscn" id="10_wr18j"]
-[ext_resource type="PackedScene" uid="uid://dmb5tm8t6aplh" path="res://assets/slot_machine/slot_machine.tscn" id="13_mo76n"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
-size = Vector2(8, 1648)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_671wp"]
-size = Vector2(8, 2352)
 
 [sub_resource type="Theme" id="Theme_t2471"]
 default_font_size = 32
@@ -24,76 +16,7 @@ Label/colors/font_color = Color(0.9999847, 0.15619686, 0.99999994, 1)
 
 [node name="MainScene" type="Node2D" unique_id=1857006203]
 
-[node name="Map" type="Node2D" parent="." unique_id=162154985]
-scale = Vector2(4, 4)
-
-[node name="TileMap" parent="Map" unique_id=239738697 instance=ExtResource("1_gyfs4")]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Map" unique_id=1549883031]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D" unique_id=324004247]
-position = Vector2(-6, 822)
-shape = SubResource("RectangleShape2D_0ps6c")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Map" unique_id=1044416173]
-position = Vector2(2360.5, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D2" unique_id=720754685]
-position = Vector2(-6.5, 822)
-shape = SubResource("RectangleShape2D_0ps6c")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Map" unique_id=411774691]
-position = Vector2(0, -12)
-rotation = -1.5707964
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D3" unique_id=1922187950]
-position = Vector2(-6.0000005, 1174)
-shape = SubResource("RectangleShape2D_671wp")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Map" unique_id=886064416]
-position = Vector2(0, -12)
-rotation = -1.5707964
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D4" unique_id=1609399008]
-position = Vector2(-1662, 1173.9999)
-shape = SubResource("RectangleShape2D_671wp")
-
-[node name="campfires" type="Node2D" parent="Map" unique_id=284818252]
-position = Vector2(6.1035156e-05, 0)
-scale = Vector2(0.24999999, 0.24999999)
-
-[node name="campfire11" parent="Map/campfires" unique_id=2065303216 instance=ExtResource("2_42l1d")]
-position = Vector2(8966, 4408)
-
-[node name="campfire10" parent="Map/campfires" unique_id=242096052 instance=ExtResource("2_42l1d")]
-position = Vector2(4712, 1293)
-
-[node name="campfire9" parent="Map/campfires" unique_id=1588552132 instance=ExtResource("2_42l1d")]
-position = Vector2(7558, 5085)
-
-[node name="campfire6" parent="Map/campfires" unique_id=1748809970 instance=ExtResource("2_42l1d")]
-position = Vector2(7164, 3056)
-
-[node name="campfire5" parent="Map/campfires" unique_id=50706883 instance=ExtResource("2_42l1d")]
-position = Vector2(5330, 4910)
-
-[node name="campfire4" parent="Map/campfires" unique_id=825173768 instance=ExtResource("2_42l1d")]
-position = Vector2(5483, 2728)
-
-[node name="campfire3" parent="Map/campfires" unique_id=2067603892 instance=ExtResource("2_42l1d")]
-position = Vector2(3793, 901)
-
-[node name="campfire2" parent="Map/campfires" unique_id=586829636 instance=ExtResource("2_42l1d")]
-position = Vector2(7275, 431)
-
-[node name="campfire8" parent="Map/campfires" unique_id=1900073988 instance=ExtResource("2_42l1d")]
-position = Vector2(8326, 1474)
-
-[node name="campfire7" parent="Map/campfires" unique_id=68704684 instance=ExtResource("2_42l1d")]
-position = Vector2(6806, 6247)
-
-[node name="campfire" parent="Map/campfires" unique_id=1166823234 instance=ExtResource("2_42l1d")]
-position = Vector2(3290, 3316)
+[node name="Map" parent="." unique_id=239738697 instance=ExtResource("1_gyfs4")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1772661912 node_paths=PackedStringArray("target")]
 position = Vector2(1873.9999, 421.99997)
@@ -214,27 +137,6 @@ offset_right = 36.0
 offset_bottom = 36.0
 text = "Outro
 "
-
-[node name="SlotMachine7" parent="." unique_id=1748506954 instance=ExtResource("13_mo76n")]
-position = Vector2(5671, 5948)
-
-[node name="SlotMachine6" parent="." unique_id=1121703491 instance=ExtResource("13_mo76n")]
-position = Vector2(3292, 2688)
-
-[node name="SlotMachine5" parent="." unique_id=862643995 instance=ExtResource("13_mo76n")]
-position = Vector2(9248, 1958)
-
-[node name="SlotMachine4" parent="." unique_id=1274328531 instance=ExtResource("13_mo76n")]
-position = Vector2(8450, 5540)
-
-[node name="SlotMachine3" parent="." unique_id=286400650 instance=ExtResource("13_mo76n")]
-position = Vector2(7935, 3722)
-
-[node name="SlotMachine2" parent="." unique_id=1150867309 instance=ExtResource("13_mo76n")]
-position = Vector2(5657, 1869)
-
-[node name="SlotMachine" parent="." unique_id=764697583 instance=ExtResource("13_mo76n")]
-position = Vector2(3106, 134)
 
 [connection signal="on_death" from="Player" to="DeathScreen" method="show_death_screen"]
 [connection signal="pressed" from="DebugInfo/Control/CoinBtn" to="DebugInfo/Control" method="_on_coin_button_pressed"]
