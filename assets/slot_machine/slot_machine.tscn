@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d4fy8iwohkqts" path="res://assets/slotmachine.png" id="2_5pe8q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ps6c"]
+size = Vector2(19.594595, 21.486486)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ps6c"]
 radius = 55.108982
@@ -19,6 +20,7 @@ texture = ExtResource("2_5pe8q")
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1088703452]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=569192038]
+position = Vector2(-5.999999, 2.2)
 scale = Vector2(2.96, 2.96)
 shape = SubResource("RectangleShape2D_0ps6c")
 
@@ -26,6 +28,10 @@ shape = SubResource("RectangleShape2D_0ps6c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=811320220]
 shape = SubResource("CircleShape2D_0ps6c")
+
+[node name="DropZone" type="Node2D" parent="." unique_id=838356558]
+position = Vector2(-6, 21)
+rotation = -1.5707964
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
