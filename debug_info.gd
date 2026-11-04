@@ -26,3 +26,9 @@ func _on_coin_button_pressed() -> void:
 
 func _on_kill_btn_pressed():
 	player.health = 0
+
+func _on_outro_btn_pressed():
+	var ring = Item.new("prsten")
+	ring.count = 64
+	player.inventory.add(ring)
+	# get_tree().change_scene_to_file("res://assets/ui/intro/outro.tscn")

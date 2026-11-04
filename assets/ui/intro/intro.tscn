@@ -24,7 +24,8 @@ seamless = true
 
 [node name="Intro2" type="CanvasLayer" unique_id=402684537]
 script = ExtResource("1_klphw")
-SKIP_TIME = 1.0
+SKIP_TIME = 0.5
+SKIP_COUNT = 5
 NEXT_SCENE = ExtResource("2_w5ohr")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1086176753]

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@export var SKIP_TIME := 2.0
-@export var SKIP_COUNT := 10
+const SKIP_TIME := 0.5
+const SKIP_COUNT := 5
 @export var NEXT_SCENE: PackedScene
 
 
@@ -54,9 +54,9 @@ func _process(delta: float) -> void:
 		if _skip_time > SKIP_TIME:
 			if _skip_count > SKIP_COUNT:
 				print("Skipp")
+				skip()
 			_skip_count = 0
 			_skip_time = 0
-			skip()
 
 
 func _on_button_pressed() -> void:

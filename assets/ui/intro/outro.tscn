@@ -22,9 +22,10 @@ noise = SubResource("FastNoiseLite_4x1p8")
 color_ramp = SubResource("Gradient_dybwn")
 seamless = true
 
-[node name="Intro" type="CanvasLayer" unique_id=402684537]
+[node name="Outro" type="CanvasLayer" unique_id=402684537]
 script = ExtResource("1_n35fj")
-SKIP_TIME = 1.0
+SKIP_TIME = 0.5
+SKIP_COUNT = 5
 NEXT_SCENE = ExtResource("2_4w5w3")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1086176753]
