@@ -32,8 +32,8 @@ func show_death_screen():
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(content, "modulate", Color(1, 1, 1, 1), 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(background, "modulate", Color(1, 1, 1, 1), 4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_callback(func (): set_buttons_disabled(false)).set_delay(1.5)
 
-	tween.finished.connect(func (): set_buttons_disabled(false))
 	show()
 
 func set_buttons_disabled(value: bool):
