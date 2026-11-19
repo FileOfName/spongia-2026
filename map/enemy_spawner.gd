@@ -1,4 +1,4 @@
-extends TileMapLayer
+extends Node2D
 #mal by spawnovat iba ak nie je savegame.txt
 
 const ENEMY_SCENES := [
@@ -14,10 +14,9 @@ const SPAWN_TILES := [Vector2i(11, 0), Vector2i(11, 1), Vector2i(11, 3), Vector2
 @export var base_count = 5
 @export var base_size = Vector2i(4, 7)
 @export var group_radius = 150.0          # ako daleko od stredu -> px
-const MAP_FILE := "map.tscn"
 @export var _cells: Array[Vector2] = []            # kde sa mozu (aby sa nestala chyba s vonkajsim spawnom)
 
-
+@onready var _map: TileMapLayer = get_parent().get_node("TileMapLayer")
 
 
 
@@ -50,13 +49,13 @@ func _restore(saved: Array) -> void:
 func _ready() -> void:
 	_setup()
 func _setup() ->void:
-	for cell in get_used_cells():
-		if get_cell_atlas_coords(cell) in SPAWN_TILES:
-			_cells.append(to_global(map_to_local(cell)))
+	for cell in _map.get_used_cells():
+		if _map.get_cell_atlas_coords(cell) in SPAWN_TILES:
+			_cells.append(_map.to_global(_map.map_to_local(cell)))
 	if _cells.is_empty():
 		push_warning("Nenajdeee tily")
-		for cell in get_used_cells():
-			_cells.append(to_global(map_to_local(cell)))
+		for cell in _map.get_used_cells():
+			_cells.append(_map.to_global(_map.map_to_local(cell)))
 	_spawn_when_map_loaded()
 func _spawn_new() -> void:
 	if _cells.is_empty():
@@ -91,7 +90,7 @@ func _make_enemy(pos: Vector2, scene_path := "") -> Enemy:
 	get_parent().add_child(enemy)
 	enemy.global_position = pos
 	return enemy
-	
+
 func _spawn_when_map_loaded() -> void:
 	await get_tree().process_frame
 	_spawn()

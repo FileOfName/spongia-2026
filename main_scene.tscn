@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cgy5l4tp3a6ki" path="res://map/map.tscn" id="1_gyfs4"]
 [ext_resource type="Script" uid="uid://dhwgq7i2wsb20" path="res://camera.gd" id="2_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://gnmc6doeugtd" path="res://entity/player/player.tscn" id="3_8mm7a"]
+[ext_resource type="Script" uid="uid://52bendvf0nlu" path="res://map/enemy_spawner.gd" id="3_wr18j"]
 [ext_resource type="Script" uid="uid://igrv05fr8r0s" path="res://hud.gd" id="5_7ycvg"]
 [ext_resource type="Script" uid="uid://of5y4wiyceil" path="res://debug_info.gd" id="5_8mm7a"]
 [ext_resource type="PackedScene" uid="uid://bilvmgvc1esl1" path="res://health_bar/health_bar.tscn" id="6_66tet"]
@@ -18,20 +19,26 @@ Label/colors/font_color = Color(0.9999847, 0.15619686, 0.99999994, 1)
 
 [node name="Map" parent="." unique_id=239738697 instance=ExtResource("1_gyfs4")]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1772661912 node_paths=PackedStringArray("target")]
-position = Vector2(1873.9999, 421.99997)
-scale = Vector2(0.2, 0.2)
-script = ExtResource("2_d5x1h")
-target = NodePath("../Player")
-SPEED = 7.0
-MIN_TOP_LEFT = Vector2(-8, -8)
-MAX_BOTTOM_RIGHT = Vector2(9400, 6584)
-
-[node name="Player" parent="." unique_id=214714032 instance=ExtResource("3_8mm7a")]
+[node name="Player" parent="Map" unique_id=214714032 instance=ExtResource("3_8mm7a")]
 position = Vector2(3637, 985)
 SPEED = 200.0
 MAX_HEALTH = 200.0
 INVULNERABILITY_SECONDS = 0.2
+
+[node name="EnemySpawner" type="Node2D" parent="Map" unique_id=672970685]
+script = ExtResource("3_wr18j")
+random_spawns = 40
+patrolky = 6
+base_count = 10
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1772661912 node_paths=PackedStringArray("target")]
+position = Vector2(1873.9999, 421.99997)
+scale = Vector2(0.2, 0.2)
+script = ExtResource("2_d5x1h")
+target = NodePath("../Map/Player")
+SPEED = 7.0
+MIN_TOP_LEFT = Vector2(-8, -8)
+MAX_BOTTOM_RIGHT = Vector2(9400, 6584)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1167556653]
 
@@ -43,7 +50,7 @@ offset_top = 48.0
 offset_right = 88.0
 offset_bottom = 88.0
 script = ExtResource("5_7ycvg")
-player = NodePath("../../Player")
+player = NodePath("../../Map/Player")
 
 [node name="HealthBar" parent="HUD/Control" unique_id=102016543 node_paths=PackedStringArray("entity") instance=ExtResource("6_66tet")]
 layout_mode = 0
@@ -56,7 +63,7 @@ offset_right = 96.0
 offset_bottom = 14.0
 grow_vertical = 1
 pivot_offset_ratio = Vector2(0, 0)
-entity = NodePath("../../../Player")
+entity = NodePath("../../../Map/Player")
 
 [node name="CoinIcon" type="TextureRect" parent="HUD/Control" unique_id=1398216639]
 layout_mode = 0
@@ -107,7 +114,7 @@ offset_bottom = 20.0
 grow_vertical = 2
 theme = SubResource("Theme_t2471")
 script = ExtResource("5_8mm7a")
-player = NodePath("../../Player")
+player = NodePath("../../Map/Player")
 
 [node name="CoinLabel" type="Label" parent="DebugInfo/Control" unique_id=1636654386]
 layout_mode = 0
@@ -138,7 +145,7 @@ offset_bottom = 36.0
 text = "Outro
 "
 
-[connection signal="on_death" from="Player" to="DeathScreen" method="show_death_screen"]
+[connection signal="on_death" from="Map/Player" to="DeathScreen" method="show_death_screen"]
 [connection signal="pressed" from="DebugInfo/Control/CoinBtn" to="DebugInfo/Control" method="_on_coin_button_pressed"]
 [connection signal="pressed" from="DebugInfo/Control/DeathBtn" to="DebugInfo/Control" method="_on_kill_btn_pressed"]
 [connection signal="pressed" from="DebugInfo/Control/OutroBtn" to="DebugInfo/Control" method="_on_outro_btn_pressed"]

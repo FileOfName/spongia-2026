@@ -24,8 +24,7 @@ grow_vertical = 2
 script = ExtResource("1_jix8l")
 
 [node name="Map" parent="." unique_id=239738697 instance=ExtResource("1_06t4h")]
-position = Vector2(-1544, -389)
-scale = Vector2(3, 3)
+position = Vector2(-2439, -699)
 
 [node name="Goblin" parent="." unique_id=176842737 instance=ExtResource("2_7vrkn")]
 position = Vector2(881, 491)
