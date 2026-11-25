@@ -277,7 +277,7 @@ func load_game() -> void:
 	global_position = data.get("position", global_position)
 	campfires = data.get("camps", [])
 
-	var real_campfires = get_parent().get_node("Map").get_node("Campfires")
+	var real_campfires = $"../Campfires"
 	if real_campfires:
 		var dist = INF
 		var pos = Vector2.ZERO
@@ -301,5 +301,9 @@ func load_game() -> void:
 
 func _death():
 	on_death.emit()
+
+#TEMP: dont remove the player from the scene on death
+func _death_anim_finished():
+	pass
 
 signal on_death()

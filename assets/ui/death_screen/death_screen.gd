@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _on_respawn_pressed() -> void:
 	# TEMPORARY
-	var player = get_parent().get_node("Player")
+	var player = $"../Map/Player"
 	player.inventory.coins = 0
 	#var spawner = EnemySpawner.new()
 	#spawner._setup()
